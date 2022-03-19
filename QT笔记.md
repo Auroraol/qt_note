@@ -1,4 +1,4 @@
-#  
+#
 
 
 
@@ -901,7 +901,7 @@ void MyLabel::timerEvent(QTimerEvent *e)
 
 ![img](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16.png)
 
-![img](QT笔记.assets/ea38d77decb642328ee77daa1c09fa08.png)
+![img](QT笔记.assets/ea38d77decb642328ee77daa1c09fa08.png)第二种定时器用法：（推荐)
 
 ```c++
 第二种定时器用法：
@@ -915,7 +915,6 @@ void MyLabel::timerEvent(QTimerEvent *e)
      static int number = 0;                            // 只初始化一次
      this->setText(QString::number(number++));
   });
-
 ```
 
 ++++
@@ -1508,8 +1507,7 @@ Widget::Widget(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->selectFile,&QPushButton::clicked,this,[=]()
     {
-       /*//打开文件对话框:
-       
+       //打开文件对话框:  
        QString filename = QFileDialog::getOpenFileName(this,"open file","C:\\") ;  
        //没有选择文件进行警告：
        if (filename.isEmpty()==true)
@@ -1518,7 +1516,7 @@ Widget::Widget(QWidget *parent) :
            return;
        }
        
-       */
+      
        ui->filePath->setText(filename); //把文件显示到到filePath文本窗口中
 
        //创建文件对象,并打开文件（filename）开始读取对象：
@@ -1716,14 +1714,15 @@ Server::Server(QWidget *parent) :
     //实例化 init
     server = new QTcpServer(this);
     //监听
-    server->listen(QHostAddress(ui->sIp->text()),ui->sPort->text().toInt());  //port是字符串，用toint（）转化成整形值
+    server->listen(QHostAddress(ui->sIp->text()), ui->sPort->text().toInt());  //port是字符串，用toint（）转化成整形值
     
       
     //链接(建立链接)【接受信号&QTcpServer::newConnection】
-    connect(server,&QTcpServer::newConnection,this,[=](){
+    connect(server,&QTcpServer::newConnection,this,[=]()
+    {
        //接受客服端的套接字对象 accpept
        //sock_addr 结构体 == 相当于qt中的 类QTcpSocket
-       conn = server->nextPendingConnection();  //监听请求队列拿到一个请求给“通讯”,初始化了conn .  nextPendingConnection()接受客服端的套接字对象【及保存客户端的IP，port】
+       conn = server->nextPendingConnection();  //监听请求队列拿到一个请求给“通讯”,初始化了conn .                                nextPendingConnection()接受客服端的套接字对象【及保存客户端的IP，port】
        ui->msg_record->append("有新的连接.....");
         
        //保证conn 是一个有效的对像
@@ -1815,11 +1814,11 @@ Client::Client(QWidget *parent) :
     //ui实例化
     ui->sIp->setText("127.0.0.1");
     ui->sPort->setText("9999");
-    
+
     //init
     client = new QTcpSocket(this);
         
-    //链接(建立链接）  连接服务器（它不管什么时候连接成功的 ）
+    //链接(建立链接）  连接服务器    
     client->connectToHost(QHostAddress(ui->sIp->text()),ui->sPort->text().toInt());
         
     //接收数据:  [如果链接成功去]
@@ -1844,8 +1843,12 @@ Client::Client(QWidget *parent) :
 Client::~Client()
 {
     delete ui;
-}
+
+   
 ```
+
+**要点：**//链接(建立链接）  连接服务器
+    client->**connectToHost**(QHostAddress(ui->sIp->text()),ui->sPort->text().toInt())
 
 +++
 
@@ -1921,7 +1924,7 @@ private:
 #endif // WIDGET_H
 ```
 
-
+### 服务器端
 
 **.cpp文件：**
 
@@ -1976,7 +1979,9 @@ Widget::~Widget()
 
 客户端 .h 文件：没有添加的
 
-**客户端.cpp文件：**
+### **客户端**
+
+**.cpp文件：**
 
 ```c++
 #include "client.h"
@@ -2074,4 +2079,314 @@ Client::~Client()
 
 ![img](QT笔记.assets/V244FV%%4NV71PS%G_BW`R.png)
 
+
+
 ![image-20220319164657448](QT笔记.assets/image-20220319164657448.png)
+
+![img](https://img-blog.csdnimg.cn/3beba34d0ca6451faa953dbc22e3f5d8.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+
+
+### **服务端**：
+
+```c++
+#ifndef SERVER_H
+#define SERVER_H
+
+#include <QWidget>
+#include<QTcpServer>
+#include<QTcpSocket>
+#include<QFile>
+#include<QTimer>
+namespace Ui {
+class Server;
+}
+
+class Server : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit Server(QWidget *parent = 0);
+    void sendData(); //接受文件数据
+    ~Server();
+
+private:
+    Ui::Server *ui;
+    QTcpServer* watch;
+    QTcpSocket* chat;
+
+};
+
+#endif // SERVER_H
+```
+
+![img](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16-16476828244772.png)
+
+```c++
+#include "server.h"
+#include "ui_server.h"
+#include <QFile>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QTimer>
+#include <QPushButton>
+
+Server::Server(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::Server)
+{
+    ui->setupUi(this);
+    //监听套接字
+    watch =new QTcpServer(this);
+
+    //监听  这里是任意 IP 但是指定了端口号
+    watch->listen( QHostAddress::Any , 77 );
+
+    //如果有新的连接  watch相对与之前的serrver都是命名
+    connect( watch ,&QTcpServer::newConnection,   this, [=]()
+    {
+
+        //接收客户端套接字对象,从连接请求中选择一个请求连接
+        chat = watch->nextPendingConnection();
+
+        //获取对方的ip和端口：
+        QString ip = chat->peerAddress().toString();
+        quint16 sort = chat->peerPort();
+        
+		//input1是文本框命称
+        ui->input1->append( QString("连接成功%1:%2").arg(ip).arg(sort) );
+        ui->input1->append("请选则你要传输的文件" );
+    });
+
+        
+    //选择文件 + 读取文件：
+     connect(ui->choose1 , &QPushButton::clicked , this, [=]()
+     {
+        QString filepath = QFileDialog::getOpenFileName ( this ,  "请选择文件" , "e\\" );
+        if( filepath.isEmpty() == true  )
+            QMessageBox::warning (this  ,   "警告" , "文件打开失败");
+      
+        //文本框里显示文件路径：
+        ui->input1->append(filepath);
+
+        //获取文件的名字和大小
+        QFileInfo qfi(filepath) ;
+        //为头报文做准备    
+        QString filename= qfi.fileName();
+        qint64 filesize = qfi.size();
+
+        //设置已发送大小变量
+         qint64 sendsize = 0;
+
+         //读取文件
+        QFile file；
+        file.setFileName(filepath) ;    //or QFile file(filepath)
+        bool a = file.open(QFile::ReadOnly);
+        if (a == false)
+        {
+            QMessageBox::critical (this  ,   "警告" , "文件读取失败");
+            return ;
+        }
+    });
+
+   QTimer timer = new QTimer(this);
+   connect (&timer ,&QTimer::timeout , this , [=](){
+        //先关闭定时器要用的时候开启
+       timer.stop();
+       // 调用自定义的函数：
+       sendData();  
+    });
+
+   //发送按钮
+   connect(ui->send1 , &QPushButton::clicked , this, [=]()
+   {
+         //【先】发送头报文
+         QString  head = QString("%1##%2").arg(filename).arg(filesize);
+
+         qint64 len_head = chat->write( head.toUtf8() );   
+      /* tcp 通讯的：
+        conn->write(ui->msg->toPlainText().toUtf8().data());  
+       //访问发送的文本框内容，并发送数据  
+       //toPlainText()返回值是QString 而write（）接受值是char*或QBytearrayy
+        //把QString转化成QBytearrayy 用.toUtf8().data()转化
+       */
+       
+      
+         if (len_head > 0)         //如果发送的投报文有就执行
+         {
+            timer.start(1000) ;   //开启定时器
+            ui->input1->append("正在发送文件");
+         }
+         else
+         {
+           qDebug()<<"头部信息发送失败" ;
+           file.close();
+         }
+   });
+}
+
+//自定义的函数：
+void Server::sendData(){
+
+    //发送文件信息
+
+    //发送文件
+    qint64 len = 0 ;
+
+    do{
+        //设置,每次发送的大小为4k 
+        char buf[4*1024]= {0};
+
+        //读入源文件数据read（）
+        len= file.read(  buf , sizeof(buf) );
+
+        //发出数据 （这里是读多少,发送多少）
+        len=chat->write( buf , len);
+
+        //发送数据需要累积
+        sendsize = sendsize + len;
+
+    }while(len>0 );   //只要len>0 就不断循环do中的内容
+
+    if (filesize == sendsize)
+        {
+
+        ui->input1->append("发送成功");
+        file.close();
+
+        //把客户端关了
+        chat->disconnectFromHost();
+        chat->close();
+    }
+}
+
+
+Server::~Server(){ delete ui;}
+
+```
+
++++
+
+###  **客户端**：
+
+```c++
+#ifndef CLIENT_H
+#define CLIENT_H
+
+#include <QWidget>
+#include<QTcpSocket>
+#include<QFile>
+
+namespace Ui {
+class client;
+}
+
+class client : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit client(QWidget *parent = 0);
+    ~client();
+
+private:
+    Ui::client *ui;
+    QTcpSocket* chat1;
+    QFile file;
+    QString filename;
+    qint64 filesize;
+    qint64 recevesize;
+
+    bool a;
+
+};
+
+#endif // CLIENT_H
+```
+
+```c++
+#include "client.h"
+#include "ui_client.h"
+#include <QMessageBox>
+#include<QHostAddress>
+
+client::client(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::client)
+{
+    ui->setupUi(this);
+
+    chat1= new QTcpSocket;
+
+    a = true ;
+
+    connect( ui->connect ,  &QPushButton::clicked , this ,  [=](){
+
+        QString ip = ui->ip1->text();
+        qint16 sort = ui->sort1->text().toInt();
+
+        //连接服务器 connectToHost
+        chat1->connectToHost(QHostAddress(ip) , sort);
+
+    } );
+        
+
+    //接受数据
+    connect ( chat1 , &QTcpSocket::readyRead, this, [=]()
+    {
+
+        QByteArray bta = chat1->readAll();    //发的就是头报文
+        qDebug()<<bta;
+
+
+        if(true == a )
+        {
+
+            //用a ==true,表示接受头部信息
+            a = false ; 下一次执行else的代码去判断是否接受完毕（因为服务器是用循环一部分一部分发送的） 
+
+            //解析头 ,字节数组转换为QString
+            filename =QString(bta).section("##",0,0);
+            filesize = QString(bta).section("##",1,1).toInt();
+
+            recevesize=0;
+
+            qDebug()<<filename<<filesize ;
+
+            //打开文件(不会显示的)
+            file.setFileName("C:\\"+filename);
+            bool ab = file.open(QFile::WriteOnly);
+            if (ab == false)
+                QMessageBox::critical (this  ,   "警告" , " 接受文件失败");
+        
+        else  //文件信息
+        {
+            qint64 len = file.write(bta);  //这里的write是文件的读写
+            recevesize = len +recevesize;
+
+            if (recevesize == filesize)
+            {
+                file.close();
+                QMessageBox::information(this , "恭喜" , "文件接受完成");
+                //关掉连接
+                chat1->disconnectFromHost();
+                chat1->close();
+             }
+         }
+   });
+}
+
+client::~client(){delete ui;}
+```
+
+效果：
+
+![image-20220319195502998](QT笔记.assets/image-20220319195502998.png)
+
++++
+
+
+
+
+

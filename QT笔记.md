@@ -1,4 +1,4 @@
-# 程序运行发布和设置APP图标
+程序运行发布和设置APP图标
 
 
 
@@ -455,6 +455,8 @@ signal and slot
 
 ### 自定义槽函数
 
+不创建新的c++的情况
+
 1. 声明
 
 ![image-20220619215514168](QT笔记.assets/image-20220619215514168.png)
@@ -718,9 +720,9 @@ void Subwigdet::myslot()
 
 
 
-# 知识点三: QT的输出qDebug()<<
+# QT的输出qDebug()函数
 
-
+**qDebug()  <<**
 
 ```c++
 #include <QDebug>
@@ -736,6 +738,17 @@ qDebug() << num << str.toUtf8().data();  //如果出现中文乱码的情况,可
 
 
 
+
+# QStrnglist  所有字符串的列表
+
+**返回包含子字符串 str 的所有字符串的列表：**
+
+1. ```c++
+   1.  QStringList list;
+   2.  list << "Bill Murray" << "John Doe" << "Bill Clinton";
+   ```
+
+   
 
 
 
@@ -784,35 +797,163 @@ qDebug() << num << str.toUtf8().data();  //如果出现中文乱码的情况,可
 
 
 
-## ==**通过ui->控件名**==         访问到控件
+## **通过ui->控件名**        访问到控件
+
+## 一般情况下;   回去点击跳转到槽----->可以直接自动声明槽函数(方便)
 
 +++++
 
 ## 各种控件作用
 
+
+
+
+
 ![image-20220318102127545](QT笔记.assets/image-20220318102127545.png)
 
-![image-20220318102916601](QT笔记.assets/image-20220318102916601.png)![image-20220318103208852](QT笔记.assets/image-20220318103208852.png)<!-->组框一般与radio button 连用
 
 
+## Buttons控件
+
+![image-20220318102916601](QT笔记.assets/image-20220318102916601.png)![image-2022031810
+
+
+
+
+
+### 1. ToolButton
+
+
+
+![image-20220623211906934](QT笔记.assets/image-20220623211906934.png)
+
+![image-20220623212348014](QT笔记.assets/image-20220623212348014.png)
+
+![image-20220623212617590](QT笔记.assets/image-20220623212617590.png)
+
+------
+
+###  2.Radio Button  &&  Group Button
+
++ **成组使用, 只能单选.**
+
+![img](QT笔记.assets/S2OZ5NTJWY[]@QT9V52PD.png)
+
+![image-20220623213202592](QT笔记.assets/image-20220623213202592.png)
+
+
+
+
+
+**组框一般与radio button 连用**  .  目的: 让几个成组的radio button不是同一个组的东西, 
+
+
+
+![3208852](QT笔记.assets/image-20220318103208852.png)
+
+
+
+
+
+### 3.Cheak Bax
+
+![image-20220623214910746](QT笔记.assets/image-20220623214910746.png)
+
+
+
+![image-20220623214959003](QT笔记.assets/image-20220623214959003.png)
+
+​																**勾选后会有三种状态**
+
+
+
+
+
+
+
+## List Widget控件
+
+
+
+### 1.list Widget
+
+![image-20220623220520901](QT笔记.assets/image-20220623220520901.png)
+
+####  additem(字符串)
+
+==**使用在控件中添加一行内容 ：      additem（“一行内容”）**==：    可以是文本可以是 图片
+
+![image-20220623220804509](QT笔记.assets/image-20220623220804509.png)
+
+
+
+![image-20220623220452530](QT笔记.assets/image-20220623220452530.png)
+
+------------
+
+ **文本对齐方式**:     ==setTextAlignment()==    Alignment   对齐
+
+----------------
+
+![image-20220623221136135](QT笔记.assets/image-20220623221136135.png)
+
+
+
+
+
+#### addItems(list列表)
+
+![image-20220623223011341](QT笔记.assets/image-20220623223011341.png)
+
+![image-20220623223029168](QT笔记.assets/image-20220623223029168.png)
+
+-------------
+
+
+
+### 2. Tree Widget控件
+
+
+
+基本
+
+![image-20220629202516154](QT笔记.assets/image-20220629202516154.png)
+
+![image-20220629202627715](QT笔记.assets/image-20220629202627715.png)
+
+设计图标
+
+![image-20220629202713995](QT笔记.assets/image-20220629202713995.png)
+
+
+
+![img](QT笔记.assets/[{`[ZS26}Y52CAWEZRD1SOG.png)
+
+
+
+------------------
+
+再添加分支:
+
+![image-20220629203337070](QT笔记.assets/image-20220629203337070.png)
+
+
+
+![](QT笔记.assets/image-20220629203152639.png)
+
+
+
+### 3.Table Widget
+
+表格
+
+![image-20220623224109784](QT笔记.assets/image-20220623224109784.png)
+
+![image-20220623224206049](QT笔记.assets/image-20220623224206049.png)
+
+![image-20220623224227521](QT笔记.assets/image-20220623224227521.png)
 
 + 
-
-![image-20220318110540280](QT笔记.assets/image-20220318110540280.png)
-
-++++
-
-![请添加图片描述](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16-164757173877510.png)
-
-![img](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16-164757195333312.png)
-
-<!---->==**使用setCurrentIndex（索引）**==   **跳转到相应页面**   “可瑞婷大克斯”
-
-+++++++
-
-<!---->==**使用在控件中添加一行内容 ：      additem（“一行内容”）**==：    可以是文本可以是 ![请添加图片描述](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16-16475708658208.png)
-
-+ ==**<!-==
 
 ```c++
 Table Widget设置：
@@ -824,32 +965,270 @@ list <<  "" << "" << "" << "" ;  一次性加多个
 
 setHorizontalHeaderLables(list)     以水平的方式设置上述内容
 ----------------------
-addItem（list）                      以一行一行的设置内容
+setItem（row, col, list）                      以一行一行的设置内容
 ```
 
 -->==
 
-![请添加图片描述](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16-164758191330844.png)
+-------------
 
-**浮动窗口：**
 
-![image-20220318112349358](QT笔记.assets/image-20220318112349358.png)
 
-![image-20220318112423519](QT笔记.assets/image-20220318112423519.png)
+![img](QT笔记.assets/23SIK3_UC`_W8CUV[[9JT2.png)
 
-浮动窗口要使用show()方法   会以顶层方式重新弹出来一个窗口
+
+
+![image-20220629204216635](QT笔记.assets/image-20220629204216635.png)
+
+![image-20220629204231719](QT笔记.assets/image-20220629204231719.png)
+
+![img](QT笔记.assets/@SSV1PZKAXD@G7}FZ}{KEBR.png)
+
+
+
+
+
+
+
+---------
+
+## Containers控件
+
+
 
 ++++
 
-####  使用
+![image-20220629204842941](QT笔记.assets/image-20220629204842941.png)
 
-**一般情况下;   回去点击跳转到槽----->可以直接自动声明槽函数(方便)**
-
-
+---------
 
 
 
+![image-20220629204905208](QT笔记.assets/image-20220629204905208.png)
 
+
+
+--------------
+
+
+
+![image-20220629205047913](QT笔记.assets/image-20220629205047913.png)
+
+-------
+
+**通过按钮才能切换控件**
+
+stack wight 顾名思义一推控件
+
+![image-20220629205329485](QT笔记.assets/image-20220629205329485.png)
+
+
+
+<!---->==**使用setCurrentIndex（索引）**==   **跳转到相应页面**   “可瑞婷大克斯”
+
++++++++
+
+
+
+---------------
+
+
+
+## Input Widget控件
+
+
+
+![](QT笔记.assets/image-20220318110540280.png)
+
+
+
+
+
+![image-20220629211447646](QT笔记.assets/image-20220629211447646.png)
+
+
+
+![image-20220629211508312](QT笔记.assets/image-20220629211508312.png)
+
+
+
+![image-20220629211621655](QT笔记.assets/image-20220629211621655.png)
+
+
+
+...............
+
+
+
+++++
+
+##  自定义控件
+
+![image-20220318145309087](QT笔记.assets/image-20220318145309087.png)
+
+![image-20220318145012878](QT笔记.assets/image-20220318145012878.png)
+
+++++
+
+![假如我们有如下的需求,](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16-164758606287253.png)
+
+![请添加图片描述](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16-164758610205255.png)
+
+![请添加图片描述](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16-164758611333557.png)
+
+
+
+![image-20220318145446910](QT笔记.assets/image-20220318145446910.png)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+
++++
+
+QSpinBox ”死频波克斯 “和 horizontalSlider:   "死来爹儿"：
+
+![image-20220318151833890](QT笔记.assets/image-20220318151833890.png)
+
+-----------------
+
+
+
+**是和上面有所不同的**
+
+
+
+代码：
+
+```c++
+子窗口.h
+    
+#ifndef SMALLWIDGET_H
+#define SMALLWIDGET_H
+
+#include <QWidget>
+
+namespace Ui {
+class SmallWidget;
+}
+
+class SmallWidget : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit SmallWidget(QWidget *parent = 0);
+    ~SmallWidget();
+
+    // 获取值
+    int getValue();
+    // 设置值
+    void SetValue(int value);
+
+private:
+    Ui::SmallWidget *ui;
+};
+
+#endif // SMALLWIDGET_H
+
+```
+
+```c++
+子窗口.cpp
+
+#include "smallwidget.h"
+#include "ui_smallwidget.h"
+
+SmallWidget::SmallWidget(QWidget *parent) 
+    QWidget(parent
+    ui(new Ui::SmallWidget)
+{
+    ui->setupUi(this);
+
+    // 指向正确的函数版本,z   5/11
+    void (QSpinBox::*sigValueChange)(int) = &QSpinBox::valueChanged;   // 指向正确的函数版本
+    connect(ui->spinBox, sigValueChange, ui->horizontalSlider, &QSlider::setValue);
+
+    connect(ui->horizontalSlider, &QSlider::valueChanged, ui->spinBox, &QSpinBox::setValue);
+}
+
+SmallWidget::~SmallWidget()
+{
+    delete ui;
+}
+
+void SmallWidget::SetValue(int value)
+{
+    if(value > 0 && value < 100)
+    {
+        ui->spinBox->setValue(value);
+    }
+}
+
+int SmallWidget::getValue() //获取值
+{
+    return ui->spinBox->value();
+}
+
+```
+
+![image-20220318153243042](QT笔记.assets/image-20220318153243042.png)
+
+**上述代码用指针函数的原因：该信号就是重载的**
+
+
+
+
+
+##   lable标签控件
+
+### 加图片\动态图片
+
+
+
+```c++
+#include <QMovie>    //加动态图片
+```
+
+
+
+```c++
+{
+    ui->setupUi(this);
+    //显示文字
+    ui->label->setText("I love you Rick!");  
+    //显示图片
+    ui->label_2->setPixmap(QPixmap(":/Image/Image/1.jpeg"));
+    ui->label_2->setScaledContents(true);   // 缩放
+    //显示动图
+    QMovie *mv = new QMovie(":/Image/Image/2.gif");
+    ui->label_3->setMovie(mv);
+    ui->label_3->setScaledContents(true);  // 缩放
+    mv->start();
+}
+```
+
+![image-20220701214706248](QT笔记.assets/image-20220701214706248.png)
+
+<video src="../../QQ录屏20220701214808.mp4"></video>
+
+------------
+
+![img](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16-164758212004548.png)
+
+![请添加图片描述](QT笔记.assets/77ec39d7dda04f44a0ece15f8ee9b48d-164758226287551.gif)
+
+
+
+### 设置label的颜色：
+
+
+
+```c++
+background-color: rgb(0, 0, 1)
+```
+
+![image-20220320163514008](QT笔记.assets/image-20220320163514008.png)
+
++++
+
+--------------------
 
 
 
@@ -1037,6 +1416,20 @@ addWidget( 控件 )          将控件添加到状态栏
 
 ![image-20220620220900025](QT笔记.assets/image-20220620220900025.png)
 
+----------
+
+**浮动窗口：**
+
+![image-20220318112349358](QT笔记.assets/image-20220318112349358.png)
+
+![image-20220318112423519](QT笔记.assets/image-20220318112423519.png)
+
+浮动窗口要使用show()方法   会以顶层方式重新弹出来一个窗口
+
+
+
+---------------
+
 
 
 --------------------
@@ -1082,12 +1475,14 @@ addWidget( 控件 )          将控件添加到状态栏
 
 
 
-  **":    +  前缀  + 文件名"**
++  **":    +  前缀  + 文件名"**
 
-
++ ```
+  设置控件的   setIcon()
+  ```
 
   + ```
-    设置图片（==setWindowIcon(QIcon("E:\\1.jpg图片路径")); //给窗口加图标== ）
+    设置窗口的图片（setWindowIcon(QIcon("E:\\1.jpg图片路径")); //给窗口加图标 ）
     ```
 
     ![image-20220620230602157](QT笔记.assets/image-20220620230602157.png)
@@ -1514,8 +1909,6 @@ QColorDialog color = new QColorDialog(this);
 
 
 
-
-
 ```c++
 QWizard wizard(this);
  wizard.setWindowTitle("向导对话框");
@@ -1567,134 +1960,7 @@ QWizard wizard(this);
 
 
 
-#  知识点十:  给标签控件加图片\动态图片
 
-```c++
-#include <QMovie>    //加动态图片
-```
-
-![img](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16-164758212004548.png)
-
-![请添加图片描述](QT笔记.assets/77ec39d7dda04f44a0ece15f8ee9b48d-164758226287551.gif)
-
-
-
-#### 设置label的颜色：
-
-
-
-```c++
-background-color: rgb(0, 0, 1)
-```
-
-![image-20220320163514008](QT笔记.assets/image-20220320163514008.png)
-
-+++
-
-
-
-# day03
-
-## 知识点十一: 自定义控件
-
-![image-20220318145309087](QT笔记.assets/image-20220318145309087.png)
-
-![image-20220318145012878](QT笔记.assets/image-20220318145012878.png)
-
-++++
-
-![假如我们有如下的需求,](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16-164758606287253.png)
-
-![请添加图片描述](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16-164758610205255.png)
-
-![请添加图片描述](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16-164758611333557.png)
-
-
-
-![image-20220318145446910](QT笔记.assets/image-20220318145446910.png)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-
-+++
-
-QSpinBox ”死频波克斯 “和 horizontalSlider:   "死来爹儿"：
-
-![image-20220318151833890](QT笔记.assets/image-20220318151833890.png)
-
-代码：
-
-```c++
-子窗口.h
-    
-#ifndef SMALLWIDGET_H
-#define SMALLWIDGET_H
-
-#include <QWidget>
-
-namespace Ui {
-class SmallWidget;
-}
-
-class SmallWidget : public QWidget
-{
-    Q_OBJECT
-
-public:
-    explicit SmallWidget(QWidget *parent = 0);
-    ~SmallWidget();
-
-    // 获取值
-    int getValue();
-    // 设置值
-    void SetValue(int value);
-
-private:
-    Ui::SmallWidget *ui;
-};
-
-#endif // SMALLWIDGET_H
-
-```
-
-```c++
-子窗口.cpp
-
-#include "smallwidget.h"
-#include "ui_smallwidget.h"
-
-SmallWidget::SmallWidget(QWidget *parent) 
-    QWidget(parent
-    ui(new Ui::SmallWidget)
-{
-    ui->setupUi(this);
-
-    void (QSpinBox::*sigValueChange)(int) = &QSpinBox::valueChanged;
-    connect(ui->spinBox, sigValueChange, ui->horizontalSlider, &QSlider::setValue);
-
-    connect(ui->horizontalSlider, &QSlider::valueChanged, ui->spinBox, &QSpinBox::setValue);
-}
-
-SmallWidget::~SmallWidget()
-{
-    delete ui;
-}
-
-void SmallWidget::SetValue(int value)
-{
-    if(value > 0 && value < 100)
-    {
-        ui->spinBox->setValue(value);
-    }
-}
-
-int SmallWidget::getValue() //获取值
-{
-    return ui->spinBox->value();
-}
-
-```
-
-![image-20220318153243042](QT笔记.assets/image-20220318153243042.png)
-
-**上述代码用指针函数的原因：该信号就是重载的**
 
 ## 知识点十二: QString（格式化输出）
 
@@ -1706,18 +1972,13 @@ int SmallWidget::getValue() //获取值
 
 
 
-## QStrnglist返回包含子字符串 str 的所有字符串的列表：
+
+
+# ---------------------------------------------
 
 
 
-1. ```
-   1.  QStringList list;
-   2.  list << "Bill Murray" << "John Doe" << "Bill Clinton";
-   ```
-
-   
-
-## 知识点十三: 事件
+# 事件
 
 ### 1.鼠标事件
 
@@ -1840,6 +2101,8 @@ void MyLabel::mouseReleaseEvent(QMouseEvent *ev)
     setText(str);
 }
 
+ 
+//鼠标移动   // buttons() 按住
 void MyLabel::mouseMoveEvent(QMouseEvent *ev)
 {
     QString btn;
@@ -1874,9 +2137,154 @@ void MyLabel::mouseMoveEvent(QMouseEvent *ev)
 
 
 
+>
+>
+>
+
+
+
+
+
+**例子2:**
+
+
+
+```c++
+#ifndef WIDGET_H
+#define WIDGET_H
+
+#include <QWidget>
+
+namespace Ui {
+class Widget;
+}
+
+class Widget : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit Widget(QWidget *parent = 0);
+    ~Widget();
+
+private:
+    Ui::Widget *ui;
+    QPoint pos;     //当前窗体的位置
+
+protected:
+    // 鼠标按下
+    void mousePressEvent(QMouseEvent *event);
+    //鼠标释放
+    void mouseReleaseEvent(QMouseEvent *event);
+    //鼠标双击事件
+    void mouseDoubleClickEvent(QMouseEvent *event);
+    //鼠标移动
+    void mouseMoveEvent(QMouseEvent *event);
+    // 滚轮
+    void wheelEvent(QWheelEvent *event);
+};
+
+#endif // WIDGET_H
+
+```
+
+
+
+
+
+```c++
+#include "widget.h"
+#include "ui_widget.h"
+#include <QMouseEvent>
+#include <QDebug>
+
+Widget::Widget(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::Widget)
+{
+    ui->setupUi(this);
+}
+
+Widget::~Widget()
+{
+    delete ui;
+}
+
+void Widget::mousePressEvent(QMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton)
+    {
+        // 左键被按下
+        qDebug() << "Left Button is pressed.";
+        //qDebug() << "x = " << event->x() << ", y = " << event->y();   // 显示坐标
+        qDebug() << "x = " << event->globalX() << ", y = " << event->globalY();  // 全局的相当于桌面的的坐标
+    }
+    else if(event->button() == Qt::RightButton)
+    {
+          qDebug() << "Right Button is pressed.";
+          qDebug() << "x = " << event->x() << ", y = " << event->y();
+    }
+}
+
+void Widget::mouseReleaseEvent(QMouseEvent *event)
+{
+        qDebug() << "Button is released";
+}
+
+
+void Widget::mouseDoubleClickEvent(QMouseEvent *event)
+{
+    // 目的是左键双击,设置成全屏
+    if(event->button() == Qt::LeftButton)
+    {
+        if(windowState() != Qt::WindowFullScreen)
+        {// 不是全屏
+            setWindowState(Qt::WindowFullScreen); // 设置成满屏
+        }
+        else
+        {
+            setWindowState(Qt::WindowNoState);   // 再次双击就是回到初始化的状态
+        }
+    }
+}
+
+// 移动
+void Widget::mouseMoveEvent(QMouseEvent *event)
+{
+    if(event->buttons() & Qt::LeftButton)
+    {
+        QPoint temp;  //坐标点
+
+        temp = event->globalPos() - pos;   // 全局位置 - 当前窗体的位置
+        move(temp);  // 进行窗体移动
+    }
+}
+
+
+//滚轮-->放大字体之类的
+void Widget::wheelEvent(QWheelEvent *event)
+{
+    if(event->delta() > 0)
+        ui->textEdit->zoomIn();  // 向上滚放大
+    else
+        ui->textEdit->zoomOut();
+}
+
+```
+
+
+
+----------
+
+
+
+
+
 ###  2.定时器
 
-+ 1.**定时器—>第一种写法**:
+
+
++ **定时器—>第一种写法**:
 + ![在这里插入图片描述](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16-164759532236266.png)
 
 ![在这里插入图片描述](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16-164759539284268.png)
@@ -1935,16 +2343,28 @@ void MyLabel::timerEvent(QTimerEvent *e)
  timer->start(100);                                    //说明定时器每隔100ms触发一次
  connect(timer, &QTimer::timeout, this, [=]()          //&QTimer::timeout每到100ms就触发一次信号
  {
-     static int number = 0;                            // 只初始化一次
-     this->setText(QString::number(number++));
+     static int number = 0;                            // 只初始化一次  // 静态的
+     this->setText(QString::number(number++));    // QString::number转换
   });
+
+// 每个一秒钟进行
 ```
 
 ++++
 
 
 
-## 知识点十四: 绘图—>QPainter
+### 3.事件分发
+
+
+
+-------------------
+
+
+
+# 绘图
+
+## 绘图基本操作—>QPainter
 
 ”屏特儿”
 
@@ -1992,11 +2412,107 @@ private:
 
 ```
 
+
+
 **重点：在当前窗口实现绘画的话     就是在protected下定义  “画家函数” void paintEvent(QPaintEvent *);**
 
 ​                                                             **并且只能在画家函数下使用画家类**
 
+### 核心
+
+```c++
+void Widget::paintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
+
+    // 设置画笔
+    QPen pen(QColor(255, 0, 0));  // QColor()设置颜色agb
+    pen.setWidth(3);  // 设置宽度
+    pen.setStyle(Qt::DashDotLine);  // 画的线类型
+    // 画家拿到画笔
+    painter.setPen(pen);
+
+
+    //两点确定一条直线
+    painter.drawLine(QPoint(0,0), QPoint(100, 100));
+    //圆心 a b --->椭圆
+    painter.drawEllipse(QPoint(100,100), 20, 20);
+    //左上角的坐标 长 宽 --->矩形
+    painter.drawRect(100, 100, 10, 20);
+    //坐标 字符串 -->设置文字
+    painter.drawText(200, 200,"文字");  // 默认的字体
+    QFont font("华文彩云", 48, 75, true);   //QFont 设置字体：
+    painter.setFont(font);
+    painter.drawText(100, 400, "我是中国人, 我爱我的祖国!!!");
+
+   //设置画刷
+    QBrush brush(Qt::green, Qt::Dense3Pattern); // 颜色 画刷类型
+    painter.setBrush(brush);
+    painter.drawRect(300, 300, 50, 80);
+
+    //坐标 起始度数(0-360) 锥形渐变
+    QConicalGradient conicalGradint(QPointF(200.0, 100.0), 0);  // QPointF 浮点型的坐标点
+    conicalGradint.setColorAt(0.2, Qt::cyan);   // 渐变颜色->用给定的颜色在给定的位置创建一个停止点。给定位置必须在0到1的范围内。  Qt::cyan青色
+    conicalGradint.setColorAt(0.4, Qt::black);
+    conicalGradint.setColorAt(0.7, Qt::red);
+    conicalGradint.setColorAt(1, Qt::yellow);
+    painter.setBrush(conicalGradint);   // 必须使用画刷
+    painter.drawEllipse(QPoint(250, 250), 50, 50);
+
+}
+```
+
+![image-20220712163605376](QT笔记.assets/image-20220712163605376.png)
+
+
+
+
+
 +++
+
+### **常见图形**
+
+```c++
+void Widget::paintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
+
+    // 两点确定一条直线
+    painter.drawLine(QPoint(0,0), QPoint(100, 100));
+    //圆心 a b --->椭圆
+    painter.drawEllipse(QPoint(100,100), 20, 20);
+    //左上角的坐标 长 宽 --->矩形
+    painter.drawRect(100, 100, 10, 20);
+
+}
+```
+
+![](QT笔记.assets/image-20220712154046295.png)
+
+![image-20220712154057116](QT笔记.assets/image-20220712154057116.png)
+
+--------
+
+
+
+### **画笔**
+
+```c++
+// 设置画笔
+QPen pen(QColor(255, 0, 0));  // QColor()设置颜色agb
+pen.setWidth(3);  // 设置宽度
+pen.setStyle(Qt::DashDotLine);  // 画的线类型
+// 画家拿到画笔
+painter.setPen(pen);
+```
+
+大致效果：
+
+![image-20220712163507250](QT笔记.assets/image-20220712163507250.png)
+
+
+
+补充：
 
 ![请添加图片描述](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16-16476058928074.png)
 
@@ -2008,6 +2524,17 @@ private:
 
 +++
 
+
+
+### **画刷**
+
+```c++
+//设置画刷
+QBrush brush(Qt::green, Qt::Dense3Pattern); // 颜色 画刷类型
+painter.setBrush(brush);
+painter.drawRect(300, 300, 50, 80);
+```
+
 ![image-20220318203609853](QT笔记.assets/image-20220318203609853.png)
 
 ==效果：==
@@ -2016,9 +2543,62 @@ private:
 
 +++
 
+
+
+### **字体**
+
+```c++
+//坐标 字符串 -->设置文字
+// 字体样式 字体大小 加粗 斜体
+painter.drawText(200, 200,"文字");  // 默认的字体
+QFont font("华文彩云", 48, 75, true);   //QFont 设置字体：
+font。setUnderline(turn)  // 设置下划线
+painter.setFont(font);
+painter.drawText(100, 400, "我是中国人, 我爱我的祖国!!!");
+```
+
+大致效果：
+
+<img src="QT笔记.assets/image-20220712161210627.png" alt="image-20220712161210627" style="zoom:50%;" />
+
+
+
+补充：
+
 ![img](QT笔记.assets/e9860a5cf6124408add2b62a3d92a84c.png)
 
-![在这里插入图片描述](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16-164760709301610.png)
+![image-20220712154251023](QT笔记.assets/image-20220712154251023.png)
+
+
+
+----
+
+
+
+### 锥形渐变
+
+Conical  Gradient    n. 锥形渐变  抗你q  格瑞顶t
+
+```c++
+//坐标 起始度数(0-360) 锥形渐变
+QConicalGradient conicalGradint(QPointF(200.0, 100.0), 0);  // QPointF 浮点型的坐标点
+conicalGradint.setColorAt(0.2, Qt::cyan);   // 渐变颜色->用给定的颜色在给定的位置创建一个停止点。给定位置必须在0到1的范围内。  Qt::cyan青色
+conicalGradint.setColorAt(0.4, Qt::black);
+conicalGradint.setColorAt(0.7, Qt::red);
+conicalGradint.setColorAt(1, Qt::yellow);
+painter.setBrush(conicalGradint);   // 必须使用画刷
+painter.drawEllipse(QPoint(250, 250), 50, 50);
+```
+
+大致效果：
+
+![image-20220712163415916](QT笔记.assets/image-20220712163415916.png)
+
+
+
+
+
+补充
 
 ```c++
 #include "widget.h"
@@ -2096,16 +2676,185 @@ void Widget::paintEvent(QPaintEvent *)    //定义画家类
     p.drawPixmap(x, 100, QPixmap(":/Image/sunny.png"));
    */
 }
-
 ```
 
 ![image-20220318205352955](QT笔记.assets/image-20220318205352955.png)
 
 
 
-## 知识点十五: 强制刷新窗口
+### 绘制容器--作用可以重复使用
+
+```c++
+QPainter painter(this);
+
+// 使用容器
+QPainterPath path;
+path.moveTo(50, 250); // 起始位置
+path.lineTo(50, 200); // 画直线
+path.lineTo(100, 100);
+path.addEllipse(QPoint(100, 100), 30, 30);
+painter.setPen(QPen(Qt::red));
+painter.drawPath(path);  // 绘制容器
+
+path.translate(200, 0);
+painter.setPen(QPen(Qt::blue));
+painter.drawPath(path);  // 绘制容器
+```
+
+效果：
+
+![](QT笔记.assets/image-20220712201315125.png)
+
+
+
+---------------
+
+
+
+## 抗锯齿和坐标系变换
+
+作用 是提高画纸。*抗锯齿*，也叫*反锯齿*，它的作用是边缘柔化，可以消除混叠等
+
+
+
+### 1.抗锯齿
+
+```c++
+QPainter painter(this);
+//1.反锯齿    Antialiasing /æntiˈeɪliəsɪŋ/ n.反锯齿  安题e零谁
+painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);  // 启动抗锯齿,会增加计算机额外负担
+```
+
+
+
+
+
+### 2.坐标轴变换
+
+```c++
+//2. 坐标系的变换
+painter.drawLine(QPoint(10, 10), QPoint(100, 100));
+painter.save();  // 保存当前坐标系
+painter.translate(200, 0);  // 平移 像素点
+painter.rotate(90);  // 旋转 度数   //rotate  v. （使）旋转，
+painter.setPen(QPen(Qt::cyan, 5));
+painter.drawLine(QPoint(10, 10), QPoint(100, 100));
+painter.restore();  // 恢复坐标系
+```
+
+效果：
+
+![image-20220712171939914](QT笔记.assets/image-20220712171939914.png)
+
+
+
+### 3.坐标轴缩放
+
+**坐标和长宽都会变化**
+
+```c++
+//3. 坐标系缩放
+painter.setPen(QPen(Qt::red));
+painter.setBrush(Qt::yellow);
+painter.drawRect(200, 200, 50, 50);
+painter.save();
+painter.scale(1.5, 2);   // 缩放  (nx,my)
+painter.setBrush(Qt::cyan);
+painter.drawRect(200, 200, 50, 50);
+```
+
+![image-20220712172618842](QT笔记.assets/image-20220712172618842.png)
+
+
+
+-------
+
+### 4.坐标轴扭曲
+
+ **x坐标轴扭曲表示: 左上角和右下角->撑**
+
+```c++
+//4.坐标系扭曲
+painter.setPen(QPen(Qt::blue));
+painter.setBrush(Qt::yellow);
+painter.drawRect(100, 100, 50, 50);
+painter.save();
+painter.shear(1.5, 2);   // 扭曲  x坐标轴扭曲表示: 左上角和右下角
+painter.setBrush(Qt::cyan);
+painter.drawRect(100, 100, 50, 50);
+
+```
+
+![image-20220712173604625](QT笔记.assets/image-20220712173604625.png)
+
+
+
+---------------
+
+
+
+## 手动调用绘图事件处理函数-----刷新窗口
+
+### 案例1
+
+```c++
+#include "widget.h"
+#include <QPainter>
+#include <QTimer>
+
+Widget::Widget(QWidget *parent)
+    : QWidget(parent)
+{
+    angle = 0;
+
+    QTimer * timer = new QTimer(this);
+    timer->start(1000);
+    connect(timer, &QTimer::timeout, [&](){
+        update();  // 刷新 窗口
+    });
+}
+
+Widget::~Widget()
+{
+
+}
+
+void Widget::paintEvent(QPaintEvent *)
+{
+    angle += 10;
+    if (angle == 360)
+        angle = 0;
+    QPainter painter(this);
+    painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
+    painter.translate(width()/2, height()/2);   // 坐标轴就在界面中心
+    painter.drawEllipse(QPoint(0, 0), 120, 120);
+    painter.rotate(angle); // 旋转
+    painter.drawLine(QPoint(0, 0), QPoint(100, 0));
+
+}
+```
+
+
+
+**效果：  指针会动**
+
+![image-20220712194253538](QT笔记.assets/image-20220712194253538.png)
+
+--------------
+
+###  案例2
 
 ![img](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16-164760862218313.png)
+
+
+
+**效果：  点击移动按钮船会动**
+
+![image-20220712194457445](QT笔记.assets/image-20220712194457445.png)
+
+
+
+---------------
 
 ![image-20220318224356633](QT笔记.assets/image-20220318224356633.png)
 
@@ -2117,6 +2866,10 @@ void Widget::paintEvent(QPaintEvent *)    //定义画家类
 
 
 
+
+
+
+
 ## 知识点十六: 绘图设备（给画家的纸）
 
 ![img](https://img-blog.csdnimg.cn/ffffffe96f9740c38d8cbef73e51c14a.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16)
@@ -2125,7 +2878,7 @@ void Widget::paintEvent(QPaintEvent *)    //定义画家类
 
 
 
-```
+```c++
 // QWidget
 // QPixmap QImage QPicture QBitmap(黑白图片)
 // QBitmap 父类 QPixmap
@@ -2197,8 +2950,10 @@ void Widget::paintEvent(QPaintEvent *)    //定义画家类
   >
   > 可以使用任何的扩展名 , 如果我们要画一个机密图 ,就可以采用这种方式,别人即使得到我们的文件,也不一定知道我们是用QT中的Qpicture绘画出来的.
 
-  ==**在窗口中画出来**==（相当于画背景图）
+  
 
+  ==**在窗口中画出来**==（相当于画背景图）
+  
   ![在这里插入图片描述](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16-164761108902017.png)==**集合：**==
 
 ```

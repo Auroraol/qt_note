@@ -1,0 +1,185 @@
+#include "server.h"
+
+#include <QDebug>
+#include <QMutex>
+#include <QSettings>
+#include <QApplication>
+#include <QTextCodec>
+#include <QtGui/QCursor>
+
+extern QMutex g_bufferLocker_;
+extern QList<QByteArray> g_BufferList_;  //图片数据
+
+#define SERVER_PORT 44444  //服务器端口号
+
+Server::Server(QObject* parent)
+    : QObject(parent)
+    , isLockMouse_(false)
+    , lockTimes_(0)
+    , timer_(new QTimer(this))
+{
+    server_ = new QTcpServer();
+    if (!server_->listen(QHostAddress::Any, SERVER_PORT)) // 监听
+    {
+        qDebug() << QString::fromLocal8Bit("服务器开启失败") << server_->errorString();
+    }
+    else
+    {
+        qDebug() << QString::fromLocal8Bit("服务器开启") ;
+    }
+    connect(server_, &QTcpServer::newConnection, this, &Server::clinetConnected);
+    connect(timer_, &QTimer::timeout, this, &Server::sendData); // 定时器发送桌面数据
+    timer_->start(20); // 每隔20毫秒发送
+}
+
+Server::~Server()
+{
+}
+
+//新增客户端
+void Server::clinetConnected()
+{
+    QTcpSocket* camera = server_->nextPendingConnection(); // 获取通讯套接字
+    QString ip = camera->peerAddress().toString();
+    QString port = QString().setNum(camera->peerPort());
+    QString clientName = ip + ":" + port;
+    // 使用hash表保存通讯套接字
+    clientMap_[clientName] = camera;  //QMap<QString, QTcpSocket*> clientMap_;
+    qDebug() << "新增客户端: " << clientName << "当前客户端个数:" << clientMap_.size();
+    connect(camera, &QTcpSocket::disconnected, this, &Server::removeClient);  // 通讯套接字没有连接服务器就断开
+    // 通讯
+    connect(camera, &QTcpSocket::readyRead, this,  &Server::clientIncomingMsg);
+}
+
+//移除客户端
+void Server::removeClient()
+{
+    QTcpSocket* client = (QTcpSocket*)sender();
+    QString ip = client->peerAddress().toString();
+    QString port = QString().setNum(client->peerPort());
+    QString cameraName = ip + ":" + port;
+    if (clientMap_.contains(cameraName))
+    {
+        clientMap_.remove(cameraName);
+    }
+    qDebug() << "移除客户端: " << cameraName << "当前客户端个数:" << clientMap_.size();
+}
+
+// 与客户端通讯
+void Server::clientIncomingMsg()
+{
+    QByteArray intbytes;
+    QTcpSocket* tcpSocket_ = (QTcpSocket*)sender();
+    QHostAddress address = tcpSocket_->peerAddress();
+    QString ip = address.toString();
+    quint16 portnum = tcpSocket_->peerPort();
+    QString port = QString().setNum(portnum);
+    QString clientName = ip + ":" + port;
+    if (tcpSocket_->bytesAvailable() < (int)sizeof(quint16))
+    {
+        return;
+    }
+    quint64 blockSize = tcpSocket_->bytesAvailable(); //返回数据大小返回数据大小
+    QByteArray tcpbuffer = tcpSocket_->read(blockSize); // 读数据
+    qDebug() << clientName << tcpbuffer.toHex();
+}
+
+// 发数据 // 每隔20毫秒发送
+void Server::sendData()
+{
+    // 锁定鼠标, isLockMouse_由upd决定
+    if (isLockMouse_)
+    {
+        lockTimes_++;
+        if (lockTimes_ > 3000)
+        {
+            isLockMouse_ = false;
+            lockTimes_ = 0; // 锁定鼠标
+        }
+        lockMouse();
+    }
+    else
+    {
+        lockTimes_ = 0;
+    }
+    QByteArray data;
+    g_bufferLocker_.lock();
+    if (g_BufferList_.size() > 0)
+    {
+        data = g_BufferList_.takeFirst();  // list[0], 发的是图片
+    }
+    g_bufferLocker_.unlock();
+    if (data.length() > 0 && clientMap_.size() > 0)
+    {
+        // 如果有数据有客户端, 向所有客户端发送
+        QList<QTcpSocket*> clients = clientMap_.values(); // 返回list
+        foreach (QTcpSocket* client, clients)
+        {
+            quint64 length = data.size();
+            //size 图片大小
+            QByteArray array;
+            array.setRawData((char*) & (length), sizeof(length)); // 图片大小
+            data.prepend(array); //放在前面
+            //header 消息头
+            data.prepend("HT");
+            quint64 size = client->write(data);  //发送数据
+            qDebug() << "发送数据大小: " << size << " 到 " << client->peerAddress().toString();
+        }
+        //  图片大小 消息头 图片数据
+    }
+}
+// 开启自启
+void Server::setAutoStart()
+{
+    QString sApp = QApplication::applicationFilePath();//我的程序名称
+    sApp.replace("/", "\\");
+    QSettings* setting = new QSettings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion", QSettings::NativeFormat);
+    QTextCodec* codec = QTextCodec::codecForName("GBK");
+    setting->setIniCodec(codec);
+    //开机自动运行
+    setting->beginGroup("Run");
+    setting->setValue("Monitor.exe", QVariant(sApp));
+    setting->endGroup();
+    delete setting;
+    setting = NULL;
+}
+//取消开机自动运行
+void Server::stopAutoStart()
+{
+    QString sApp = QApplication::applicationFilePath();//我的程序名称
+    sApp.replace("/", "\\");
+    QSettings* setting = new QSettings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion", QSettings::NativeFormat);
+    QTextCodec* codec = QTextCodec::codecForName("GBK");
+    setting->setIniCodec(codec);
+    //取消开机自动运行
+    setting->beginGroup("Run");
+    setting->remove("Monitor.exe");
+    setting->endGroup();
+    delete setting;
+    setting = NULL;
+}
+bool Server::GetIsAutoStart()
+{
+    QSettings* setting = new QSettings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", QSettings::NativeFormat);
+    QStringList keyList = setting->childKeys();
+    delete setting;
+    setting = NULL;
+    if (keyList.contains(QString::fromLocal8Bit("Monitor.exe")))
+    {
+        return true;
+    }
+    return false;
+}
+// 锁定鼠标
+void Server::lockMouse()
+{
+    //QPoint pos = QCursor::pos();
+    //pos.setX(pos.x());
+    //pos.setY(pos.y());
+    QCursor::setPos(QPoint(0, 0));
+}
+// 是否锁定鼠标的槽函数
+void Server::lockerMouseSlot(bool isLock)
+{
+    isLockMouse_ = isLock;  //true
+}

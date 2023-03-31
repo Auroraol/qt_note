@@ -756,7 +756,7 @@ setLayout(layout);//设置顶级布局管理器
 
 
 
-# Qt中实现屏幕或窗口(控件)截图功能
+# 截图功能
 
 要想在Qt中实现屏幕或窗口截图功能 ，通常有两种方法：
 
@@ -815,3 +815,94 @@ QImage Client::CatchScreen()
     return screen->grabWindow(0).toImage();  // 返回QImag
 }
 ```
+
+
+
+
+
+# 项目: 俄罗斯方块
+
+
+
+![image-20230227163515184](QT%E7%AC%94%E8%AE%B02.assets/image-20230227163515184.png)
+
+
+
+
+
+
+
+# 设置阴影边框
+
+
+
+```
+ // 设置阴影边框;
+        QGraphicsDropShadowEffect* d =  new QGraphicsDropShadowEffect(this);
+        d->setOffset(-4, -4);
+        d->setColor(QColor(73, 229, 237));   // 阴影颜色
+        d->setBlurRadius(40);                // 阴影半径;
+        ui->Btn_Widget->setGraphicsEffect( d);  // 窗口上的所有控件使用当前的阴影效果;
+```
+
+<img src="QT笔记2.assets/image-20230313202704097.png" alt="image-20230313202704097" style="zoom:50%;" />
+
+
+
+# 开启自启
+
+```
+// 开启自启
+void Server::setAutoStart()
+{
+    QString sApp = QApplication::applicationFilePath();//我的程序名称
+    sApp.replace("/", "\\");
+    QSettings* setting = new QSettings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion", QSettings::NativeFormat);
+    QTextCodec* codec = QTextCodec::codecForName("GBK");
+    setting->setIniCodec(codec);
+    //开机自动运行
+    setting->beginGroup("Run");
+    setting->setValue("Monitor.exe", QVariant(sApp));
+    setting->endGroup();
+    delete setting;
+    setting = NULL;
+}
+//取消开机自动运行
+void Server::stopAutoStart()
+{
+    QString sApp = QApplication::applicationFilePath();//我的程序名称
+    sApp.replace("/", "\\");
+    QSettings* setting = new QSettings("HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion", QSettings::NativeFormat);
+    QTextCodec* codec = QTextCodec::codecForName("GBK");
+    setting->setIniCodec(codec);
+    //取消开机自动运行
+    setting->beginGroup("Run");
+    setting->remove("Monitor.exe");
+    setting->endGroup();
+    delete setting;
+    setting = NULL;
+}
+```
+
+# Qt实现模糊匹配功能的实例详解
+
+[Qt实现模糊匹配功能的实例详解_C 语言_脚本之家 (jb51.net)](https://www.jb51.net/article/265187.htm)
+
+设置匹配方式，在Completer中存在以下几种匹配模式，分别列举，如下：
+
+| 模式                       | 描述                                                         |
+| :------------------------- | :----------------------------------------------------------- |
+| Qt::MatchExactly           | 只匹配第一个字/词                                            |
+| Qt::MatchFixedString       | 只匹配第一个词，并且区分大小写                               |
+| Qt::MatchContains          | 只要字符串中包含字/词就能匹配                                |
+| Qt::MatchStartsWith        | 与第一个字/词进行匹配                                        |
+| Qt::MatchEndsWith          |                                                              |
+| Qt::MatchCaseSensitive     | 搜索区分大小写                                               |
+| Qt::MatchRegExp            | 使用正则表达式作为搜索项执行基于字符串的匹配（Qt5.15）       |
+| Qt::MatchRegularExpression | 使用正则表达式作为搜索项执行基于字符串的匹配（Qt5.15）       |
+| Qt::MatchWildcard          | 使用带有通配符的字符串作为搜索条件，执行基于字符串的匹配     |
+| Qt::MatchWrap              | 执行一个环绕的搜索，这样当搜索到达模型中的最后一项时，就会从第一个项开始，直到检查完所有项为止 |
+| Qt::MatchRecursive         | 搜索整个层次结构                                             |
+
+在使用过程中，一般采用：`Qt::MatchContains`的定义比较多。
+

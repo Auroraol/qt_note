@@ -57,8 +57,6 @@ LIBS += $$ANDROID_OPENCV/staticlibs/armeabi-v7a/libopencv_calib3d.a \
 
   4：最后一个库libopencv_java4.so是动态库，要加入到安卓的apk里。按照顺序将动态库加入进去。
 
-
-
 ![img](openvc笔记.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTIyMzA3OTg=,size_16,color_FFFFFF,t_70-16665821031282.png) ![img](openvc笔记.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3UwMTIyMzA3OTg=,size_16,color_FFFFFF,t_70-16665821031283.png)
 
  
@@ -242,4 +240,3 @@ QPixmap Mat2QImage(Mat mat)
 
 ![image-20221024160419287](openvc笔记.assets/image-20221024160419287.png)
 
-12DDDDDDDDD222222

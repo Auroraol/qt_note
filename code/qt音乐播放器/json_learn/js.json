@@ -1,0 +1,27 @@
+{
+    "address": null,
+    "color2": [
+        [
+            "black",
+            "white"
+        ],
+        [
+            "red",
+            "greed"
+        ]
+    ],
+    "languages": {
+        "serialOne": {
+            "grade": "20",
+            "language": "汉语"
+        }
+    },
+    "like": [
+        {
+            "game": "欢乐斗地主",
+            "price": 88.8
+        }
+    ],
+    "name": "老李",
+    "vip": false
+}

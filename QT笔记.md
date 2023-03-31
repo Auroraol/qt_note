@@ -1,5 +1,7 @@
 #                                                         程序运行发布和设置APP图标
 
+[(21条消息) Qt打包可执行文件.exe的两种方式_qt打包成可执行程序_阿衰0110的博客-CSDN博客](https://blog.csdn.net/m0_50669075/article/details/119413531)
+
 ## 程序运行发布(给别人电脑上能够正常运行):
 
 +  **用  release** 下创建
@@ -714,7 +716,22 @@ void Widget::on_pushButton_clicked()
 
 
 
-## 去掉xxxx
+```c++
+  setWindowFlags(Qt::FramelessWindowHint | Qt::Tool); //去掉窗口边框,和任务栏图标
+    setAttribute(Qt::WA_TranslucentBackground);//设置背景透明
+```
+
+1. 如果该窗体是主窗体：
+   （1）直接使用showMaximized()（showMaximized()）最大化和最小化
+   （2）使用showFullScreen() //功能：全屏显示 （只对主窗口有用）
+
+\#窗口关闭：
+直接调用自带close()函数，但是有个返回值，定义一个bool给收掉
+bool b = this->close();
+
+## 去掉xx
+
+xx
 
 <img src="QT笔记.assets/webp.gif" alt="img" style="zoom: 80%;" />
 
@@ -2037,7 +2054,10 @@ ui->stackedwidget->setCurrentIndex(2):
 **把控件放到 一个Widget控件里在使用setCurrentWidget(Widget控件名)**
 
 ```c++
-ui->stackedWidget->setCurrentWidget(ui->my_home_page);
+ connect(ui->Btn_M_Setting, &QPushButton::clicked, this, [ = ]()
+    {
+        ui->stackedWidget->setCurrentWidget(ui->pagesetting);
+    });
 ```
 
 +++++++
@@ -3497,7 +3517,7 @@ n. 托盘，碟；文件盘
 #include <QSystemTrayIcon>
 #include <QMenu>
 
-QSystemTrayIcon tray;*//任务栏托盘角标*
+QSystemTrayIcon *tray;*//任务栏托盘角标*
     
  
 
@@ -4470,6 +4490,33 @@ QString filename = QFileDialog::getOpenFileName(this, "打看文件", "C:\\", PL
 
 messaqe  n.消息
 
+# 自定义QMessageBox样式
+
+```
+ 		QMessageBox box;
+
+        box.setStyleSheet("QMessageBox{background-color: #536ace;\
+                 border:1px solid #CCFFF6;\
+                border-radius:3px;\
+                }");
+        box.setWindowTitle("截图提示");
+        box.setText( QString::fromLocal8Bit("保存成功\n%1").arg(fileName));
+        box.exec();
+```
+
+```
+//设置文本框的大小
+box.setStyleSheet("QLabel{"
+                      "min-width:100px;"
+                      "min-height:40px; "
+                      "font-size:16px;"
+                      "}");
+
+
+```
+
+
+
 #### 不带图片:
 
 ![image-20220622225509124](QT笔记.assets/image-20220622225509124.png)
@@ -5074,6 +5121,8 @@ bool mylabel::event(QEvent  *event1)
 
 ## 事件过滤器eventFilter
 
+相当于指定画纸
+
 ![请添加图片描述](QT笔记.assets/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBAd2Vla3Nvb28=,size_20,color_FFFFFF,t_70,g_se,x_16.png)
 
 .
@@ -5632,6 +5681,41 @@ void Widget::keyPressEvent(QKeyEvent *event)     // 键盘按下事件
     }
 }
 ```
+
+```c++
+Qt中，Qt::Key_Enter是小键盘的回车，而大键盘的回车是Qt::Key_Return
+```
+
+```c++
+void QKeyBoard::keyPressEvent(QKeyEvent *event){
+	switch(event->key()){
+		case Qt::Key_Tab:
+			if(!event->isAutoRepeat()){
+				this->ui.textEdit_press->append("Key_Tab Press");
+                /* add your code here*/
+			}
+			break;
+	
+		/*default:
+			this->ui.textEdit->append("KeyEvent");*/
+	}
+}
+ 
+void QKeyBoard::keyReleaseEvent(QKeyEvent *event){
+	switch(event->key()){
+		case Qt::Key_Tab:
+			if(!event->isAutoRepeat()){
+				this->ui.textEdit_release->append("Key_Tab Release");
+                /* add your code here*/
+			}
+			break;
+		/*default:
+			this->ui.textEdit->append("KeyEvent");*/
+	}
+}
+```
+
+
 
 ```c++
 void Widget::keyReleaseEvent(QKeyEvent *event)   // 按键释放事件
@@ -7134,7 +7218,7 @@ void MainWindow::paintEvent(QPaintEvent* event)
 {
     QPainter myPainter(this);
     myPainter.setOpacity(0.9);          //背景图片透明度
-    myPainter.drawPixmap(0, 0, this->width(), this->height(), QPixmap(":/image/images/background.jpg"));
+    myPainter.drawPixmap(0, 0, this->width(), this->height(), 	QPixmap(":/image/images/background.jpg"));
 }
 ```
 
@@ -11868,11 +11952,22 @@ QDesktopServices::openUrl(QUrl(URL.toLatin1()));
 简单的网络下载：
 
 ```c++
- QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+QNetworkAccessManager *manager = new QNetworkAccessManager(this);
 //manager具有异步API，当http请求完成后，会通过finished信号进行通知
  connect(manager, &QNetworkAccessManager::finished, this, &MyClass::replyFinished);
  manager->get(QNetworkRequest(QUrl("http://qt-project.org")));  //发送异步get请求
 ```
+
+```
+// 到的的数据
+    int code = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    qDebug() << "operation：" << reply->operation();  // 请求状态
+    qDebug() << "status code；" << code;              // 状态码
+    qDebug() << "urL：" << reply->url();              // url
+    qDebug() << "raw header：" << reply->rawHeaderList(); // header
+```
+
+
 
 ##  二、封装Json[ createJson() ]
 
@@ -12564,8 +12659,252 @@ void delJson()
 
 ## 案列音乐播放器
 
+```c++
+void QtMusic::slotOnSerach()
+{
+    QString strSongName = ui.lineEditSearch->text();
+    if (strSongName.trimmed().isEmpty())
+    {
+        return;
+    }
+    // 接口
+    QString url = "http://iwxyi.com:3000/search?keywords=" + strSongName.toUtf8().toPercentEncoding();    // 进行网络下载
+    QNetworkAccessManager* manager = new QNetworkAccessManager;
+    QNetworkRequest* request = new QNetworkRequest(url);
+    request->setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded; charset=UTF-8"); //在请求中，有一种数据传输的Content-Type 是application/x-www-form-urlencoded。
+    request->setHeader(QNetworkRequest::UserAgentHeader, "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36");
+    // 获取查询的接口返回
+    connect(manager, &QNetworkAccessManager::finished, this, [ = ](QNetworkReply * reply)
+    {
+        QByteArray data = reply->readAll();
+        //解析
+        QJsonParseError error;
+        QJsonDocument document = QJsonDocument::fromJson(data, &error);
+        //解析出错判断
+        if (document.isNull() || error.error != QJsonParseError::NoError)
+        {
+            qDebug() << error.errorString();  //返回JSON解析错误时报告的错误信息
+            return;
+        }
+        //
+        QJsonObject json = document.object(); // 转化为对象
+        if (json.value("code").toInt() != 200)
+        {
+            qDebug() << "(返回结果不为200：)" << json.value("message").toString();  // 获取指定 key 对应的 value
+            return;
+        }
+        // 转化为数组 //QJsonArray封装了Json里的数组
+        QJsonArray musics = json.value("result").toObject().value("songs").toArray(); //toObject()就是在转成json对象
+        searchResultSongs.clear();
+        foreach(QJsonValue val, musics)
+        {
+            //searchResultSongs其实是一个list
+            searchResultSongs << Music::fromJson(val.toObject()); //Music::fromJson是musicbeans.h里的
+        }
+        // 设置界面显示
+        setSearchResultTable(searchResultSongs);
+    });
+    manager->get(*request);
+}
+```
+
+解析的json数据
+
+```c++
+#ifndef MUSIC_H
+#define MUSIC_H
+#include <QUrl>
+#include <QJsonDocument>
+#include <QJsonParseError>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QList>
+#include <QDateTime>
+#include <QSettings>
+
+#define JSON_VAL_LONG(json, x) static_cast<qint64>(json.value(#x).toDouble())
+#define JVAL_LONG(x) static_cast<qint64>(json.value(#x).toDouble())
+#define JVAL_INT(x) json.value(#x).toInt()
+#define JVAL_STR(x) json.value(#x).toString()
+#define snum(x) QString::number(x)
+
+struct Artist
+{
+    qint64 id = 0;
+    QString name;
+    QString faceUrl;
+
+    static Artist fromJson(QJsonObject json)
+    {
+        Artist artist;
+        artist.id = JVAL_LONG(id);
+        artist.name = JVAL_STR(name);
+        artist.faceUrl = JVAL_STR(img1v1Url);
+        return artist;
+    }
+
+    QJsonObject toJson() const
+    {
+        QJsonObject json;
+        json.insert("id", id);
+        json.insert("name", name);
+        json.insert("faceUrl", faceUrl);
+        return json;
+    }
+};
+
+struct Album
+{
+    qint64 id = 0;
+    QString name;
+    int size = 0;
+    int mark = 0;
+
+    static Album fromJson(QJsonObject json)
+    {
+        Album album;
+        album.id = JVAL_LONG(id);
+        album.name = JVAL_STR(name);
+        album.size = JVAL_INT(size);
+        return album;
+    }
+
+    QJsonObject toJson() const
+    {
+        QJsonObject json;
+        json.insert("id", id);
+        json.insert("name", name);
+        json.insert("size", size);
+        return json;
+    }
+};
+struct Music
+{
+    qint64 id = 0;
+    QString name;
+    int duration = 0;
+    QList<Artist> artists;
+    Album album;
+    QString artistNames;
+
+    static Music fromJson(QJsonObject json)
+    {
+        Music music;
+        music.id = JVAL_LONG(id);
+        music.name = JVAL_STR(name);
+        QJsonArray array = json.value("artists").toArray(); // json中读出的artist放入一个数组
+        QStringList artistNameList;
+        foreach (QJsonValue val, array)
+        {
+           Artist artist = Artist::fromJson(val.toObject());
+           music.artists.append(artist);
+           artistNameList.append(artist.name);
+        }
+        
+        music.artistNames = artistNameList.join("/");
+        music.album = Album::fromJson(json.value("album").toObject());
+        music.duration = JVAL_INT(duration);
+        return music;
+    }
+
+    QJsonObject toJson() const
+    {
+        QJsonObject json;
+        json.insert("id", id);
+        json.insert("name", name);
+        json.insert("duration", duration);
+        QJsonArray array;
+        foreach (Artist artist, artists)
+            array.append(artist.toJson());
+        json.insert("artists", array);
+        json.insert("album", album.toJson());
+        return json;
+    }
+
+    bool isValid() const
+    {
+        return id;
+    }
+
+    bool operator==(const Music& music)
+    {
+        return this->id == music.id;
+    }
+
+    QString simpleString() const
+    {
+        return name + "-" + artistNames;
+    }
+
+};
+
+struct PlayListCreator
+{
+    QString nickname;
+    QString signature;
+    QString avatarUrl;
+};
+
+struct PlayList
+{
+  QString name;
+  qint64 id;
+  QString description;
+  QStringList tags;
+  int playCount;
+  PlayListCreator creator;
+
+  QList<Music> contiansMusic;
+
+  static PlayList fromJson(QJsonObject json)
+  {
+      PlayList playlist;
+//      music.id = JVAL_LONG(id);
+      playlist.name = JVAL_STR(name);
+
+      QJsonArray array = json.value("contiansMusic").toArray();
+      QStringList contiansMusicList;
+      foreach (QJsonValue val, array)
+      {
+          Music music = Music::fromJson(val.toObject());
+          playlist.contiansMusic.append(music);
+          contiansMusicList.append(music.name);
+      }
+//      music.artistNames = artistNameList.join("/");
+//      music.album = Album::fromJson(json.value("album").toObject());
+//      music.duration = JVAL_INT(duration);
+      return playlist;
+  }
+
+  QJsonObject toJson() const
+  {
+      QJsonObject json;
+//      json.insert("id", id);
+      json.insert("name", name);
+      QJsonArray array;
+      foreach (Music music, contiansMusic)
+          array.append(music.toJson());
+      json.insert("contiansMusic", array);
+//      json.insert("duration", duration);
+//      json.insert("album", album.toJson());
+      return json;
+  }
+
+  bool operator==(const PlayList& pl)
+  {
+      return this->id == pl.id;
+  }
+};
+
+typedef QList<Music> SongList;
+typedef QList<PlayList> PlayListList;
+
+#endif // MUSIC_H
+
+```
 
 
-# QFontMetrics
+
+# QFontMetricsc
 
 [(23条消息) QFontMetrics_友善啊，朋友的博客-CSDN博客_qfontmetrics](https://blog.csdn.net/kenfan1647/article/details/115171891)

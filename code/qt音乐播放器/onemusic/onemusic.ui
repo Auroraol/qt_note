@@ -1,0 +1,2481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>OneMusic</class>
+ <widget class="QMainWindow" name="OneMusic">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>708</width>
+    <height>579</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>在线音乐</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+/*--------------------------------------------------------------- 
+QStackedWidget
+--------------------------------------------------------------- */
+QStackedWidget
+{
+	background-color: #535353;
+	border: none;
+}
+
+/* QStatusBar --------------------------------------------------------------- */
+QStatusBar,
+QStatusBar QLabel
+{
+    background-color: transparent;
+    color:#FFFFFF;
+    font-size: 14px;
+    font-family: 'Microsoft yahei';
+}
+
+QStatusBar::item
+{
+	border-right: 1px solid #1F2332;
+}
+
+/*--------------------------------------------------------------- 
+QDialog, QWidget   #F2F3F5
+--------------------------------------------------------------- */
+.QDialog,
+.QWidget
+{
+	background-color: #535353;
+	color: white;
+    border:2px solid #1F2332;
+}
+
+/*---------------------------------------------------------------
+QTabWidget
+-----------------------------------------------------------------*/
+QTabWidget::pane{border: 2px solid #FFCC33; background: #535353;}
+QTabWidget::pane:top{top:-2px;} 
+QTabWidget::pane:bottom{bottom:-2px;} 
+QTabWidget::pane:left{left:-2px;} 
+QTabWidget::pane:right{right:-2px;}
+QTabWidget::pane:disabled{border: 2px solid rgb(201, 201, 201); background: #9F9F9F;}
+QTabWidget .QWidget{border:0px;}
+
+QTabBar::tab
+{
+	background:#383838; 
+	color:#FFFFFF; 
+	font: 75 11pt; 
+	min-height:48px; 
+	min-width:100px; 
+	margin-left: 1px; 
+	margin-right: 1px;
+}
+
+QTabBar::tab:selected
+{
+	background:#535353; 
+	margin-bottom:-2px; 
+	margin-left: 0px;	
+	margin-right: 0px;
+	border:2px solid #FFCC33; 
+}
+
+QTabBar::tab:disabled
+{
+	background-color: #9F9F9F;
+	color:#DDDDDD;
+	border:2px solid rgb(201, 201, 201);
+}
+
+QTabBar::tab:first{ margin-left: 0px;}
+QTabBar::tab:last{margin-right: 0px;}
+QTabBar::tab:!selected{border-bottom: 2px solid #FFCC33; margin-top: 0px;}
+QTabBar::tab:!selected:disabled{border-bottom: 2px solid rgb(201, 201, 201);}
+QTabBar::scroller{width: 60px;}
+ 
+QTabBar QToolButton 
+{ 
+	background:#383838;
+	color:#FFFFFF;
+	border:none;
+	border-bottom:2px solid #FFCC33;
+	border-radius: 0px;
+}
+
+QTabBar QToolButton:pressed
+{
+	background:#535353;
+	color:#FFFFFF;
+	border:none;
+	border-bottom:2px solid #FFCC33;
+	border-radius: 0px;
+}
+
+QTabBar QToolButton:hover
+{
+	background:#535353;
+	color:#FFFFFF;
+	border:none;
+	border-bottom:2px solid #FFCC33;
+	border-radius: 0px;
+}
+
+QTabBar QToolButton:disabled
+{
+	background: #9F9F9F;
+	color:#DDDDDD;
+	border:none;
+	border-bottom:2px solid #FFCC33;
+	border-radius: 0px;
+}
+
+QTabBar QToolButton::left-arrow{image: url(:/Resources/ArrowLeft.png);}
+QTabBar QToolButton::right-arrow{image: url(:/Resources/ArrowRight.png);}
+ 
+/*--------------------------------------------------------------- 
+QLabel
+--------------------------------------------------------------- */
+QLabel
+{
+	background-color: transparent;
+	color: #FFFFFF;
+	border:none;
+	font-size: 14px;
+	font-family: 'Microsoft yahei';
+}
+
+QLabel:disabled
+{
+	background-color: transparent;
+	color: #DDDDDD;
+}
+
+/*--------------------------------------------------------------- 
+QPlainTextEdit
+--------------------------------------------------------------- */
+QPlainTextEdit
+{
+	background: #383838;
+	color: #FFFFFF;
+	selection-background-color:#F76900;
+    selection-color:#000000;
+    border:1px solid #B8B6B6;
+    border-radius:0px;
+    padding:2px;
+    min-height:26px;
+}
+
+QPlainTextEdit:focus
+{
+    border:1px solid #FFCC33;
+}
+
+QPlainTextEdit:hover
+{
+    border:1px solid #FFCC33;
+}
+
+/*--------------------------------------------------------------- 
+QComboBox
+--------------------------------------------------------------- */
+QComboBox
+{
+    background:#383838;
+	color: #FFFFFF;
+    selection-background-color:#F76900;
+    selection-color:#000000;
+	border:1px solid #B8B6B6;
+	border-radius:2px;
+    padding:2px;
+    min-height:26px;
+}
+
+QComboBox:focus{border:1px solid #FFCC33;}
+QComboBox:hover{border:1px solid #FFCC33;}
+QComboBox:disabled{background-color: #9F9F9F; color: #D0D1D2;}
+QComboBox QAbstractItemView 
+{
+    border-radius: 4px;
+    border: 1px solid #32414B;
+    selection-color: #FFFFFF;
+    selection-background-color: #178FFF;
+}
+
+QComboBox QAbstractItemView::item
+{
+	background:#535353;
+	color:#FFFFFF;
+	min-height: 26px;
+	margin-left: 2px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	margin-right: 6px;
+}
+
+QComboBox QAbstractItemView::item:hover{background:#F76900;}
+QComboBox QAbstractItemView::item:selected{border:2px solid #FFCC33;}
+
+/*--------------------------------------------------------------- 
+QGroupBox
+--------------------------------------------------------------- */
+QGroupBox
+{
+	color:#686868;
+    margin-top:5ex;
+    border-radius:2px;
+	border:1px solid #1F2332;
+}
+
+QGroupBox::title
+{
+	background-color: #FFCC33;
+	color:#7E7A9A;
+	left: 10px;
+	top: 5px;
+	subcontrol-origin: margin;
+    subcontrol-position: top left;
+	padding: 0 3px;
+}
+
+/*--------------------------------------------------------------- 
+QMenu
+--------------------------------------------------------------- */
+QMenu 
+{
+	background:#686868;
+	color: #F0F0F0;
+    margin: 4px;
+	border-radius: 4px;
+}
+
+QMenu::separator
+{
+	background:#838383;
+    height:1px;
+}
+
+QMenu::icon
+{
+	padding-left: 6px;
+	padding-right: 6px;
+}
+
+QMenu:disabled
+{
+    background: #9F9F9F;
+    color:#D0D1D2;
+}
+
+QMenu::item
+{
+	background:#686868;
+    color:#FFFFFF;
+    min-height:26px;
+    min-width: 110px;
+    font-size: 14px;
+    font-family: 'Microsoft yahei';
+	padding-left: 16px;
+	padding-top: 4px;
+	padding-right: 16px;
+	padding-bottom: 4px;
+}
+
+QMenu::item:pressed
+{
+	background: #808080;
+    color:#FFFFFF;
+    border-bottom:1px solid #f76900;
+}
+
+QMenu::item:selected
+{
+	background: #808080;
+    color:#FFFFFF;
+    border-bottom:1px solid #f76900;
+}
+
+QMenu::item::disabled
+{
+    background: #9F9F9F;
+    color:#D0D1D2;
+	border-bottom:0px solid #f76900;
+}
+
+QMenu::item::disabled:selected
+{
+    background: #9F9F9F;
+    color:#D0D1D2;
+}
+
+QMenu::item::disabled:pressed
+{
+    background: #9F9F9F;
+    color:#D0D1D2;
+}
+
+/*--------------------------------------------------------------------
+* QPushButton, 
+* QCommandLinkButton, 
+* QToolButton 
+----------------------------------------------------------------------*/
+QPushButton,
+QCommandLinkButton, 
+QToolButton
+{
+	background-color: qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #9c9c9c, stop:1 #535353);
+	color:#FFFFFF;
+    border-radius:4px;
+    border:1px solid #B8B6B6;
+	
+	/*
+	border-radius:0px;
+	border-image:url(:/Resources/ToolButton_av.png);
+	*/
+}
+
+QPushButton:hover,
+QCommandLinkButton:hover, 
+QToolButton:hover
+{
+    color:#FFFFFF;
+	border-radius:4px;
+    border:2px solid #E5C365;
+	
+	/*
+	border-image:url(:/Resources/ToolButton_av.png);
+	*/
+}
+
+QPushButton:pressed,
+QCommandLinkButton:pressed, 
+QToolButton:pressed
+{
+	background-color: qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #FFCC33, stop:1 #FFCC33);
+    color:#4D4D4D;
+	border-radius:4px;
+    border:2px solid #F76900;
+	
+	/*
+	border-image:url(:/Resources/ToolButton_pr.png);
+	*/
+}
+
+QPushButton:checked,
+QCommandLinkButton:checked, 
+QToolButton:checked
+{
+    background-color: qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #FFCC33, stop:1 #FFCC33);
+    color:#4D4D4D;
+	border-radius:4px;
+    border:2px solid #F76900;
+	
+	/*
+	border-image:url(:/Resources/ToolButton_pr.png);
+	*/
+}
+
+QPushButton:disabled,
+QCommandLinkButton:disabled, 
+QToolButton:disabled
+{
+    background-color: #9F9F9F;
+    color:#DDDDDD;
+	border-radius:4px;
+    border:1px solid #B8B6B6;
+	
+	/*
+	border-image:url(:/Resources/ToolButton_na.png);
+	*/
+}
+
+/*--------------------------------------------------------------- 
+QCheckButton
+--------------------------------------------------------------- */
+QCheckBox {background:transparent; color:#FFFFFF; min-width: 26px; min-height: 26px; spacing: 5px; font-size: 14px;}
+QCheckBox::indicator {min-width: 24px; min-height: 24px;}
+QCheckBox::indicator:unchecked:!enabled {image: url(:/Resources/Checkbox_na.png);}
+QCheckBox::indicator:unchecked {image: url(:/Resources/Checkbox_av.png);}
+QCheckBox::indicator:unchecked:hover {image: url(:/Resources/Checkbox_av.png);}
+QCheckBox::indicator:unchecked:pressed {image: url(:/Resources/Checkbox_pr.png);}
+QCheckBox::indicator:checked:!enabled {image: url(:/Resources/Checkbox_na_se.png);}
+QCheckBox::indicator:checked {image: url(:/Resources/Checkbox_se.png);}
+QCheckBox::indicator:checked:hover {image: url(:/Resources/Checkbox_se.png);}
+QCheckBox::indicator:checked:pressed {image: url(:/Resources/Checkbox_pr_se.png);}
+QCheckBox::indicator:indeterminate{image: url(:/Resources/Checkbox_mid.png);}
+QCheckBox::indicator:indeterminate:hover{image: url(:/Resources/Checkbox_mid.png);}
+QCheckBox::indicator:indeterminate:pressed{image: url(:/Resources/Checkbox_pr_mid.png);}
+
+/*--------------------------------------------------------------- 
+QRadioButton
+--------------------------------------------------------------- */
+QRadioButton {background:transparent; color:#FFFFFF; min-width: 26px; min-height: 26px; spacing: 5px; font-size: 14px;}
+QRadioButton::indicator {min-width: 24px; min-height: 24px;}
+QRadioButton::indicator:unchecked:!enabled {image: url(:/Resources/RadioButton_na.png);}
+QRadioButton::indicator:unchecked {image: url(:/Resources/RadioButton_av.png);}
+QRadioButton::indicator:unchecked:hover {image: url(:/Resources/RadioButton_av.png);}
+QRadioButton::indicator:unchecked:pressed {image: url(:/Resources/RadioButton_pr.png);}
+QRadioButton::indicator:checked:!enabled {image: url(:/Resources/RadioButton_na_se.png);}
+QRadioButton::indicator:checked {image: url(:/Resources/RadioButton_se.png);}
+QRadioButton::indicator:checked:hover {image: url(:/Resources/RadioButton_se.png);}
+QRadioButton::indicator:checked:pressed {image: url(:/Resources/RadioButton_pr_se.png);}
+
+/*--------------------------------------------------------------- 
+QLineEdit,
+QTextEdit,
+QSpinBox,
+QDoubleSpinBox,
+QDateEdit,
+QTimeEdit,
+QDateTimeEdit
+--------------------------------------------------------------- */
+QLineEdit,
+QTextEdit,
+QSpinBox,
+QDoubleSpinBox,
+QDateEdit,
+QTimeEdit,
+QDateTimeEdit
+{
+	background: #383838;
+	color: #FFFFFF;
+	selection-background-color:#F76900;
+    selection-color:#000000;
+    border:1px solid #B8B6B6;
+    border-radius:2px;
+    padding:2px;
+    min-height:26px;
+}
+
+QLineEdit:focus,
+QTextEdit:focus,
+QSpinBox:focus,
+QDoubleSpinBox:focus,
+QDateEdit:focus,
+QTimeEdit:focus,
+QDateTimeEdit:focus
+{
+    border:1px solid #FFCC33;
+}
+
+QLineEdit:hover,
+QTextEdit:hover,
+QSpinBox:hover,
+QDoubleSpinBox:hover,
+QDateEdit:hover,
+QTimeEdit:hover,
+QDateTimeEdit:hover
+{
+    border:1px solid #FFCC33;
+}
+
+QLineEdit:disabled,
+QTextEdit:disabled,
+QSpinBox:disabled,
+QDoubleSpinBox:disabled,
+QDateEdit:disabled,
+QTimeEdit:disabled,
+QDateTimeEdit:disabled
+{
+    background-color: #9F9F9F;
+    color:#DDDDDD;
+}
+
+/*--------------------------------------------------------------- 
+Arrow-button
+--------------------------------------------------------------- */
+QTimeEdit::up-button,
+QDateEdit::up-button,
+QDateTimeEdit::up-button,
+QDoubleSpinBox::up-button,
+QSpinBox::up-button
+{
+    image:url(:/Resources/arrow/arrow_up_block.png);
+}
+
+QTimeEdit::down-button,
+QDateEdit::down-button,
+QDateTimeEdit::down-button,
+QDoubleSpinBox::down-button,
+QSpinBox::down-button
+{
+    image:url(:/Resources/arrow/arrow_down_block.png);
+}
+
+QTimeEdit::up-button:pressed,
+QDateEdit::up-button:pressed,
+QDateTimeEdit::up-button:pressed,
+QDoubleSpinBox::up-button:pressed,
+QSpinBox::up-button:pressed
+{
+    image:url(:/Resources/arrow/arrow_up_block_blue.png);
+}
+  
+QTimeEdit::down-button:pressed,
+QDateEdit::down-button:pressed,
+QDateTimeEdit::down-button:pressed,
+QDoubleSpinBox::down-button:pressed,
+QSpinBox::down-button:pressed,
+QSpinBox::down-button:pressed
+{
+    image:url(:/Resources/arrow/arrow_down_block_blue.png);
+}
+
+QComboBox::down-arrow,
+QDateEdit[calendarPopup=&quot;true&quot;]::down-arrow,
+QTimeEdit[calendarPopup=&quot;true&quot;]::down-arrow,
+QDateTimeEdit[calendarPopup=&quot;true&quot;]::down-arrow
+{
+    image:url(:/Resources/arrow/arrow_down_line.png);
+    width:10px;
+    height:10px;
+    right:2px;
+}
+
+QComboBox::down-arrow:hover,
+QDateEdit[calendarPopup=&quot;true&quot;]::down-arrow:hover,
+QTimeEdit[calendarPopup=&quot;true&quot;]::down-arrow:hover,
+QDateTimeEdit[calendarPopup=&quot;true&quot;]::down-arrow:hover
+{
+    image:url(:/Resources/arrow/arrow_down_line_blue.png);
+    width:10px;
+    height:10px;
+    right:2px;
+}
+
+QComboBox::drop-down,
+QDateEdit::drop-down,
+QTimeEdit::drop-down,
+QDateTimeEdit::drop-down
+{
+    subcontrol-origin:padding;
+    subcontrol-position:top right;
+    width:15px;
+    border-left-width:0px;
+    border-left-style:solid;
+    border-top-right-radius:3px;
+    border-bottom-right-radius:3px;
+    border-left-color:#178FFF;
+}
+
+/*--------------------------------------------------------------- 
+QTreeView,
+QTableView, 
+QTreeWidget,
+QTableWidget
+--------------------------------------------------------------- */
+QTreeView,
+QTableView, 
+QTreeWidget,
+QTableWidget
+{
+	border:1px solid #1F2332;
+}
+
+QTreeView,
+QTableView, 
+QTreeWidget::pane,
+QTableWidget::pane
+{
+	outline: 0px;
+	background-color:#F2F3F5; 
+	color:#737373;
+	gridline-color:rgba(207, 207, 207, 50%);
+	selection-background-color:#D7D7D7;
+	selection-color:#4D4D4D;
+	font-size:14px;
+	font-family:'Microsoft YaHei';
+}
+
+QTreeView::item,
+QTableView::item,
+QTreeWidget::item,
+QTableWidget::item
+{
+    outline: 0px;
+    padding-left:6px;
+    margin:0px;
+}
+
+QTreeView::item:selected,
+QTableView::item:selected,
+QTreeWidget::item:selected,
+QTableWidget::item:selected
+{
+	background-color:#FCE6A2;
+	padding-left:6px;
+	border:0px;
+	border-bottom:1px solid #f76900;
+}
+
+QTreeView::item:hover,
+QTableView::item:hover,
+QTreeWidget::item:hover,
+QTableWidget::item:hover
+{
+	background-color:#FCE6A2;
+	padding-left:6px;
+	border:0px;
+	border-bottom:1px solid #f76900;
+}
+
+QTreeView::item:disabled,
+QTableView::item:disabled,
+QTreeWidget::item:disabled,
+QTableWidget::item:disabled
+{
+    padding-left:6px;
+    margin:0px;
+}
+
+QTreeView::item:alternate:!selected,
+QTableView::item:alternate:!selected,
+QTreeWidget::item:alternate:!selected,
+QTableWidget::item:alternate:!selected
+{ 
+    background-color:#EBEBEB;
+} 
+
+QTreeView::item:!alternate:!selected,
+QTableView::item:!alternate:!selected,
+QTreeWidget::item:!alternate:!selected,
+QTableWidget::item:!alternate:!selected
+{ 
+    background-color:#E0E0E0;
+}
+
+QHeaderView::section,
+QTableCornerButton:section
+{
+	background-color:#383838; 
+	color:#FFFFFF;
+	padding-left:2px;
+	padding-right:2px;
+	font-size:14px;
+	font-family:'Microsoft YaHei';
+	border-top: 0px;
+	border-left:0px;
+	border-right:1px solid rgba(207, 207, 207, 50%);
+	border-bottom:0px;
+	min-height: 40;
+}
+
+QHeaderView::section::first
+{
+	background-color:#383838; 
+	color:#FFFFFF;
+	font-size:14px;
+	font-family:'Microsoft YaHei';
+	border-top: 0px;
+	border-left:0px;
+	border-right:1px solid rgba(207, 207, 207, 50%);
+	border-bottom:0px;
+	min-width: 26;
+}
+
+/*--------------------------------------------------------------- 
+QTreeView,
+QTreeWidget, 
+--------------------------------------------------------------- */
+QTreeView,
+QTreeWidget
+{
+	border:1px solid #1F2332;
+}
+
+QTreeView::item,
+QTreeWidget::item
+{
+	margin:3px;
+	height:36px;
+}
+
+QTreeView::branch:open:has-children,
+QTreeWidget::branch:open:has-children
+{
+    image: url(:/Resources/TreeCollapse.png);
+}
+
+QTreeView::branch::closed::has-children,
+QTreeWidget::branch::closed::has-children
+{
+    image: url(:/Resources/TreeExpand.png);
+}
+
+/*--------------------------------------------------------------- 
+QListView,
+QListWidget, 
+--------------------------------------------------------------- */
+QListView,
+QListWidget
+{
+	border:1px solid #1F2332;
+}
+
+QListView,
+QListWidget::pane
+{
+    outline: 0px;
+    background-color:#F2F3F5; 
+    color:#737373;
+    gridline-color:rgba(207, 207, 207, 50%);
+    selection-background-color:#D7D7D7;
+    selection-color:#4D4D4D;
+    font-size:14px;
+    font-family:'Microsoft YaHei';
+}
+
+QListView::item,
+QListWidget::item
+{
+    min-height:35px;
+    padding-left:6px;
+    margin:2px;
+}
+
+QListView::item:selected,
+QListWidget::item:selected
+{
+	background-color:#FCE6A2;
+	padding-left:6px;
+	border:0px;
+	border-bottom:1px solid #f76900;
+}
+
+QListView::item:hover,
+QListWidget::item:hover
+{
+	background-color:#FCE6A2;
+	padding-left:6px;
+	border:0px;
+	border-bottom:1px solid #f76900;
+}
+
+QListView::item:disabled,
+QListWidget::item:disabled
+{
+    padding-left:6px;
+    margin:0px;
+}
+
+QListView::item:alternate:!selected,
+QListWidget::item:alternate:!selected
+{ 
+    background-color:#EBEBEB;
+} 
+
+QListView::item:!alternate:!selected,
+QListWidget::item:!alternate:!selected
+{ 
+    background-color:#E0E0E0;
+}
+
+QListWidget#listWidgetOption
+{
+	border:2px solid #B8B6B6;
+}
+
+/*--------------------------------------------------------------- 
+QScrollBar
+--------------------------------------------------------------- */
+QScrollBar:vertical{background:#383838;padding:0px;min-width:12px;max-width:12px;}
+QScrollBar::handle:vertical{background:#7c7c7c;min-height:100px;border-radius:0px;}
+QScrollBar::handle:vertical:hover{background:#F76900;}
+QScrollBar::handle:vertical:pressed{background:#FFCC33;}
+QScrollBar::add-page:vertical{background:none;}
+QScrollBar::sub-page:vertical{background:none;}
+QScrollBar::add-line:vertical{background:none;}
+QScrollBar::sub-line:vertical{background:none;}
+QScrollBar:horizontal{background:#383838;padding:0px;min-height:12px;max-height:12px;}
+QScrollBar::handle:horizontal{background:#7c7c7c;min-width:100px;border-radius:0px;}
+QScrollBar::handle:horizontal:hover{background:#F76900;}
+QScrollBar::handle:horizontal:pressed{background:#FFCC33;}
+QScrollBar::add-page:horizontal{background:none;}
+QScrollBar::sub-page:horizontal{background:none;}
+QScrollBar::add-line:horizontal{background:none;}
+QScrollBar::sub-line:horizontal{background:none;}
+
+QScrollArea{background-color:#383838;}
+
+/*--------------------------------------------------------------- 
+QProgress
+--------------------------------------------------------------- */
+QProgressBar::chunk 
+{
+    border: none;
+    background: #F8AC18;
+}
+
+QProgressDialog
+{ 
+	background-color: rgb(83, 83, 83);
+	border:2px solid #1F2332 ;
+	border-radius:4px;
+}
+
+QProgressDialog QLabel
+{ 
+	background-color:transparent;
+	color:#FFFFFF; 
+	font: 75 14pt &quot;Microsoft YaHei&quot;;
+}
+
+QProgressDialog QPushButton
+{ 
+	min-width: 80;
+	min-height: 32;
+}
+
+
+/*---------------------------------------------------------------
+QToolTip
+-----------------------------------------------------------------*/
+QToolTip
+{
+    border:0px solid #000000;
+    border-radius:4px;
+    padding:1px;
+    opacity: 200; 
+    color:#FFFFFF;
+    background:rgba(0,0,0,1);
+}
+
+/*---------------------------------------------------------------
+QToolBox
+-----------------------------------------------------------------*/
+QToolBox::tab:hover
+{
+    color:#4D4D4D;
+    background:rgba(255,255,255,1);
+    border-radius:4px;
+    border:1px solid rgba(23,143,255,1);
+}
+
+QToolBox::tab:selected
+{
+    color:#4D4D4D;
+    background:rgba(232,244,255,1);
+    border-radius:4px;
+    border:1px solid rgba(18,114,204,1);
+}
+
+
+/*---------------------------------------------------------------
+QMessageBox
+-----------------------------------------------------------------*/
+QMessageBox
+{
+	background:#535353;
+	color:#000000;
+	border:2px solid #178FFF;
+}
+
+QMessageBox .QWidget
+{ 
+	background-color:#535353;
+	border:2px solid #178FFF;
+}
+
+QMessageBox QDialog
+{ 
+	background-color:#535353;
+	border:2px solid #178FFF;
+}
+
+QMessageBox QLabel
+{
+	color:#FFFFFF; 
+	font-size:14px;
+	font-family:'Microsoft yahei';
+	border:none;
+}
+
+QMessageBox QPushButton
+{
+    width: 100px;
+    height: 36px;
+}
+
+QMessageBox QToolButton
+{
+    width: 100px;
+    height: 36px;
+}
+
+/*---------------------------------------------------------------
+QSplitter
+-----------------------------------------------------------------*/
+QSplitter::handle 
+{
+	background-color: transparent;
+}
+
+QSplitter::handle:hover 
+{
+	
+	background-color:#F76900;
+}
+
+QSplitter::handle:pressed 
+{
+	
+	background-color:#FFCC33;
+}
+
+
+
+
+
+
+
+/*=======================================================================================================================================
+*
+*   Control With Specific Name
+*
+*=========================================================================================================================================*/
+
+/*--------------------------------------------------------------- 
+QStackedWidget
+--------------------------------------------------------------- */
+QStackedWidget#stackedWidget
+{
+	background-color: #535353;
+	border: 1px solid #1F2332;
+}
+
+/*--------------------------------------------------------------- 
+QWidget
+--------------------------------------------------------------- */
+
+
+/*--------------------------------------------------------------- 
+QFrame
+--------------------------------------------------------------- */
+QFrame#frameTopper
+{
+	background-color: #535353;
+	border: none;
+	border-top:2px solid #F76900;
+	border-bottom:4px solid qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 rgba(0, 0, 0, 255), stop:1 #838383);
+}
+
+QFrame#frameBottom
+{
+    background-color:#686868;
+    color:#FFFFFF;
+	border: none;
+}
+
+QFrame#frameMain,
+QFrame#frameJOG,
+QFrame#frameCustom
+{
+	background-color: #535353;
+	color: white;
+    border:none;
+}
+
+QFrame#frameNCSimul,
+QFrame#frameNCEdit,
+QFrame#frameWorkRate,
+QFrame#frameContainer
+{
+	background-color: #535353;
+	color: white;
+    border: 1px solid #1F2332;
+}
+
+QFrame#frameNCFileName,
+QFrame#frameNCTotalRows,
+QFrame#frameNCCurrentRow,
+QFrame#frameNCCurrentTime
+{
+	background:#383838; 
+    color: white;
+	border: 1px solid #1F2332;
+}
+
+QFrame#frameStatusBar
+{
+	background:#383838; 
+    color: #FFFFFF;
+	border: 1px solid #1F2332;
+	font-size: 14px;
+	font-family: 'Microsoft yahei';
+}
+
+QFrame#frameButtonGroup
+{
+	background:#2B2B2B; 
+    color: #FFFFFF;
+	border: 1px solid #1F2332;
+	font-size: 14px;
+	font-family: 'Microsoft yahei';
+}
+
+/*--------------------------------------------------------------- 
+System Menu Button
+--------------------------------------------------------------- */
+
+QToolButton#btnMenuProduce,
+QToolButton#btnMenuMachine,
+QToolButton#btnMenuDebug,
+QToolButton#btnMenuDiagnosis,
+QToolButton#btnMenuSettings,
+QToolButton#btnMenuLogger,
+QToolButton#btnMenuExtend,
+QToolButton#btnMenuMCode
+{
+	border-radius:0px;
+	border-image:url(:/Resources/MainTaskButton_av.png);
+}
+
+QToolButton#btnMenuProduce:hover,
+QToolButton#btnMenuMachine:hover,
+QToolButton#btnMenuDebug:hover,
+QToolButton#btnMenuDiagnosis:hover,
+QToolButton#btnMenuSettings:hover,
+QToolButton#btnMenuLogger:hover,
+QToolButton#btnMenuExtend:hover,
+QToolButton#btnMenuMCode:hover
+{
+	border-image:url(:/Resources/MainTaskButton_av.png);
+}
+
+QToolButton#btnMenuProduce:pressed,
+QToolButton#btnMenuMachine:pressed,
+QToolButton#btnMenuDebug:pressed,
+QToolButton#btnMenuDiagnosis:pressed,
+QToolButton#btnMenuSettings:pressed,
+QToolButton#btnMenuLogger:pressed,
+QToolButton#btnMenuExtend:pressed,
+QToolButton#btnMenuMCode:pressed
+{
+	border-image:url(:/Resources/MainTaskButton_pr.png);
+}
+
+QToolButton#btnMenuProduce:checked,
+QToolButton#btnMenuMachine:checked,
+QToolButton#btnMenuDebug:checked,
+QToolButton#btnMenuDiagnosis:checked,
+QToolButton#btnMenuSettings:checked,
+QToolButton#btnMenuLogger:checked,
+QToolButton#btnMenuExtend:checked,
+QToolButton#btnMenuMCode:checked
+{
+	border-image:url(:/Resources/MainTaskButton_pr.png);
+}
+
+QToolButton#btnMenuProduce:!enabled,
+QToolButton#btnMenuMachine:!enabled,
+QToolButton#btnMenuDebug:!enabled,
+QToolButton#btnMenuDiagnosis:!enabled,
+QToolButton#btnMenuSettings:!enabled,
+QToolButton#btnMenuLogger:!enabled,
+QToolButton#btnMenuExtend:!enabled,
+QToolButton#btnMenuMCode:!enabled
+{
+	border-image:url(:/Resources/MainTaskButton_na.png);
+}
+
+/*--------------------------------------------------------------- 
+QLabel
+--------------------------------------------------------------- */
+QLabel#labelNCFileName,
+QLabel#labelNCTotalRows,
+QLabel#labelNCCurrentRow,
+QLabel#labelNCCurrentTime
+{
+	background:transparent; 
+    color: #FFFFFF;
+	font-size: 14px;
+	font-family: 'Microsoft yahei';
+}
+
+cEventBar
+{
+	background:#383838; 
+    color: #FFFFFF;
+	border: 1px solid #1F2332;
+	font-size: 14px;
+	font-family: 'Microsoft yahei';
+}
+
+
+/*--------------------------------------------------------------- 
+QToolButton
+--------------------------------------------------------------- */
+QToolButton#btnUser,
+QToolButton#btnLogo,
+QToolButton#btnCAM
+{
+	background:transparent;
+	color:#FFFFFF;
+	border:none;
+	font-size:14px;
+	font-family:'Microsoft yahei';
+}
+
+QToolButton#btnUser:pressed,
+QToolButton#btnLogo:pressed,
+QToolButton#btnCAM:pressed
+{
+	border:2px solid rgb(201, 201, 201);
+	color:#FFFFFF;
+}
+
+QToolButton#btnUser:hover,
+QToolButton#btnLogo:hover,
+QToolButton#btnCAM:hover
+{
+	border:2px solid rgb(201, 201, 201);
+	color:#FFFFFF;
+}
+
+QToolButton#btnUser:disabled,
+QToolButton#btnLogo:disabled,
+QToolButton#btnCAM:disabled
+{
+	background-color: #9F9F9F;
+	color:#DDDDDD;
+}
+
+
+/*--------------------------------------------------------------- 
+QToolButton of Plugin
+--------------------------------------------------------------- */
+QToolButton#btnImportTask,
+QToolButton#btnUpdateTask,
+QToolButton#btnLabelPrinter,
+QToolButton#btnTaskPreview,
+QToolButton#btnExecMode,
+QToolButton#btnStepModeLabel,
+QToolButton#btnStepModeReverse,
+QToolButton#btnStepModeObverse,
+QToolButton#btnResetTask,
+QToolButton#btnOpenFile,
+QToolButton#btnCoordMdi,
+QToolButton#btnCoordBreakPoint,
+QToolButton#btnCoordStart,
+QToolButton#btnCoordStop,
+QToolButton#btnCoordReset,
+QToolButton#btnUCSCoord0,
+QToolButton#btnPosGet,
+QToolButton#btnEasySet,
+QToolButton#btnEasyClear,
+QToolButton#btnUCSCoord1,
+QToolButton#btnSaveUCS,
+QToolButton#btnToolCoord0,
+QToolButton#btnToolCoord1,
+QToolButton#btnSaveTool,
+QToolButton#btnAddUserParam,
+QToolButton#btnDeleteUserParam,
+QToolButton#btnEditUserParam,
+QToolButton#btnParamBackup,
+QToolButton#btnParamSave,
+QToolButton#btnNewUser,
+QToolButton#btnDeleteUser,
+QToolButton#btnModifyUser,
+QToolButton#btnModifyPassword,
+QToolButton#btnImportRights,
+QToolButton#btnExportRights,
+QToolButton#btnAddMCode,
+QToolButton#btnAddTCode,
+QToolButton#btnEditItem,
+QToolButton#btnDeleteItem,
+QToolButton#btnAddIOItem,
+QToolButton#btnChangeView,
+QToolButton#btnEditVirtualItem,
+QToolButton#btnDeleteVirtualItem,
+QToolButton#btnEditInputItem,
+QToolButton#btnDeleteInputItem,
+QToolButton#btnChangeInput,
+QToolButton#btnEditOutputItem,
+QToolButton#btnDeleteOutputItem,
+QToolButton#btnChangeOutput,
+QToolButton#btnStartMonitor,
+QToolButton#btnStopMonitor,
+QToolButton#btnClearMessage
+{
+	background:#464646;
+	color:#FFFFFF;
+	border:1px solid #505050;
+	border-radius:0px;
+	font-size:12px;
+	font-family:'Microsoft yahei';
+}
+
+QToolButton#btnImportTask:hover,
+QToolButton#btnUpdateTask:hover,
+QToolButton#btnLabelPrinter:hover,
+QToolButton#btnTaskPreview:hover,
+QToolButton#btnExecMode:hover,
+QToolButton#btnStepModeLabel:hover,
+QToolButton#btnStepModeReverse:hover,
+QToolButton#btnStepModeObverse:hover,
+QToolButton#btnResetTask:hover,
+QToolButton#btnOpenFile:hover,
+QToolButton#btnCoordMdi:hover,
+QToolButton#btnCoordBreakPoint:hover,
+QToolButton#btnCoordStart:hover,
+QToolButton#btnCoordStop:hover,
+QToolButton#btnCoordReset:hover,
+QToolButton#btnUCSCoord0:hover,
+QToolButton#btnUCSCoord1:hover,
+QToolButton#btnPosGet:hover,
+QToolButton#btnEasySet:hover,
+QToolButton#btnEasyClear:hover,
+QToolButton#btnSaveUCS:hover,
+QToolButton#btnToolCoord0:hover,
+QToolButton#btnToolCoord1:hover,
+QToolButton#btnSaveTool:hover,
+QToolButton#btnAddUserParam:hover,
+QToolButton#btnDeleteUserParam:hover,
+QToolButton#btnEditUserParam:hover,
+QToolButton#btnParamBackup:hover,
+QToolButton#btnParamSave:hover,
+QToolButton#btnNewUser:hover,
+QToolButton#btnDeleteUser:hover,
+QToolButton#btnModifyUser:hover,
+QToolButton#btnModifyPassword:hover,
+QToolButton#btnImportRights:hover,
+QToolButton#btnExportRights:hover,
+QToolButton#btnAddMCode:hover,
+QToolButton#btnAddTCode:hover,
+QToolButton#btnEditItem:hover,
+QToolButton#btnDeleteItem:hover,
+QToolButton#btnAddIOItem:hover,
+QToolButton#btnChangeView:hover,
+QToolButton#btnEditVirtualItem:hover,
+QToolButton#btnDeleteVirtualItem:hover,
+QToolButton#btnEditInputItem:hover,
+QToolButton#btnDeleteInputItem:hover,
+QToolButton#btnChangeInput:hover,
+QToolButton#btnEditOutputItem:hover,
+QToolButton#btnDeleteOutputItem:hover,
+QToolButton#btnChangeOutput:hover,
+QToolButton#btnStartMonitor:hover,
+QToolButton#btnStopMonitor:hover,
+QToolButton#btnClearMessage:hover
+{
+	color:#FFFFFF;
+	border:1px solid #E5C365;
+}
+
+QToolButton#btnImportTask:pressed,
+QToolButton#btnUpdateTask:pressed,
+QToolButton#btnLabelPrinter:pressed,
+QToolButton#btnTaskPreview:pressed,
+QToolButton#btnExecMode:pressed,
+QToolButton#btnStepModeLabel:pressed,
+QToolButton#btnStepModeReverse:pressed,
+QToolButton#btnStepModeObverse:pressed,
+QToolButton#btnResetTask:pressed,
+QToolButton#btnOpenFile:pressed,
+QToolButton#btnCoordMdi:pressed,
+QToolButton#btnCoordBreakPoint:pressed,
+QToolButton#btnCoordStart:pressed,
+QToolButton#btnCoordStop:pressed,
+QToolButton#btnCoordReset:pressed,
+QToolButton#btnUCSCoord0:pressed,
+QToolButton#btnUCSCoord1:pressed,
+QToolButton#btnSaveUCS:pressed,
+QToolButton#btnToolCoord0:pressed,
+QToolButton#btnToolCoord1:pressed,
+QToolButton#btnPosGet:pressed,
+QToolButton#btnEasySet:pressed,
+QToolButton#btnEasyClear:pressed,
+QToolButton#btnSaveTool:pressed,
+QToolButton#btnAddUserParam:pressed,
+QToolButton#btnDeleteUserParam:pressed,
+QToolButton#btnEditUserParam:pressed,
+QToolButton#btnParamBackup:pressed,
+QToolButton#btnParamSave:pressed,
+QToolButton#btnNewUser:pressed,
+QToolButton#btnDeleteUser:pressed,
+QToolButton#btnModifyUser:pressed,
+QToolButton#btnModifyPassword:pressed,
+QToolButton#btnImportRights:pressed,
+QToolButton#btnExportRights:pressed,
+QToolButton#btnAddMCode:pressed,
+QToolButton#btnAddTCode:pressed,
+QToolButton#btnEditItem:pressed,
+QToolButton#btnDeleteItem:pressed,
+QToolButton#btnAddIOItem:pressed,
+QToolButton#btnChangeView:pressed,
+QToolButton#btnEditVirtualItem:pressed,
+QToolButton#btnDeleteVirtualItem:pressed,
+QToolButton#btnEditInputItem:pressed,
+QToolButton#btnDeleteInputItem:pressed,
+QToolButton#btnChangeInput:pressed,
+QToolButton#btnEditOutputItem:pressed,
+QToolButton#btnDeleteOutputItem:pressed,
+QToolButton#btnChangeOutput:pressed,
+QToolButton#btnStartMonitor:pressed,
+QToolButton#btnStopMonitor:pressed,
+QToolButton#btnClearMessage:pressed
+{
+	background:#FFCC33;
+	color:#4D4D4D;
+	border:1px solid #F76900;
+}
+
+QToolButton#btnImportTask:checked,
+QToolButton#btnUpdateTask:checked,
+QToolButton#btnLabelPrinter:checked,
+QToolButton#btnTaskPreview:checked,
+QToolButton#btnExecMode:checked,
+QToolButton#btnStepModeLabel:checked,
+QToolButton#btnStepModeReverse:checked,
+QToolButton#btnStepModeObverse:checked,
+QToolButton#btnResetTask:checked,
+QToolButton#btnOpenFile:checked,
+QToolButton#btnCoordMdi:checked,
+QToolButton#btnCoordBreakPoint:checked,
+QToolButton#btnCoordStart:checked,
+QToolButton#btnCoordStop:checked,
+QToolButton#btnCoordReset:checked,
+QToolButton#btnUCSCoord0:checked,
+QToolButton#btnUCSCoord1:checked,
+QToolButton#btnSaveUCS:checked,
+QToolButton#btnToolCoord0:checked,
+QToolButton#btnToolCoord1:checked,
+QToolButton#btnSaveTool:checked,
+QToolButton#btnAddUserParam:checked,
+QToolButton#btnDeleteUserParam:checked,
+QToolButton#btnEditUserParam:checked,
+QToolButton#btnParamBackup:checked,
+QToolButton#btnParamSave:checked,
+QToolButton#btnNewUser:checked,
+QToolButton#btnDeleteUser:checked,
+QToolButton#btnModifyUser:checked,
+QToolButton#btnModifyPassword:checked,
+QToolButton#btnImportRights:checked,
+QToolButton#btnExportRights:checked,
+QToolButton#btnAddMCode:checked,
+QToolButton#btnAddTCode:checked,
+QToolButton#btnEditItem:checked,
+QToolButton#btnDeleteItem:checked,
+QToolButton#btnAddIOItem:checked,
+QToolButton#btnEditVirtualItem:checked,
+QToolButton#btnDeleteVirtualItem:checked,
+QToolButton#btnEditInputItem:checked,
+QToolButton#btnDeleteInputItem:checked,
+QToolButton#btnChangeInput:checked,
+QToolButton#btnEditOutputItem:checked,
+QToolButton#btnDeleteOutputItem:checked,
+QToolButton#btnChangeOutput:checked,
+QToolButton#btnStartMonitor:checked,
+QToolButton#btnStopMonitor:checked,
+QToolButton#btnClearMessage:checked
+{
+	background:#FFCC33;
+	color:#4D4D4D;
+	border:1px solid #F76900;
+}
+
+QToolButton#btnImportTask:disabled,
+QToolButton#btnUpdateTask:disabled,
+QToolButton#btnLabelPrinter:disabled,
+QToolButton#btnTaskPreview:disabled,
+QToolButton#btnExecMode:disabled,
+QToolButton#btnStepModeLabel:disabled,
+QToolButton#btnStepModeReverse:disabled,
+QToolButton#btnStepModeObverse:disabled,
+QToolButton#btnResetTask:disabled,
+QToolButton#btnOpenFile:disabled,
+QToolButton#btnCoordMdi:disabled,
+QToolButton#btnCoordBreakPoint:disabled,
+QToolButton#btnCoordStart:disabled,
+QToolButton#btnCoordStop:disabled,
+QToolButton#btnCoordReset:disabled,
+QToolButton#btnUCSCoord0:disabled,
+QToolButton#btnUCSCoord1:disabled,
+QToolButton#btnSaveUCS:disabled,
+QToolButton#btnToolCoord0:disabled,
+QToolButton#btnToolCoord1:disabled,
+QToolButton#btnSaveTool:disabled,
+QToolButton#btnAddUserParam:disabled,
+QToolButton#btnDeleteUserParam:disabled,
+QToolButton#btnEditUserParam:disabled,
+QToolButton#btnParamBackup:disabled,
+QToolButton#btnParamSave:disabled,
+QToolButton#btnNewUser:disabled,
+QToolButton#btnDeleteUser:disabled,
+QToolButton#btnModifyUser:disabled,
+QToolButton#btnModifyPassword:disabled,
+QToolButton#btnImportRights:disabled,
+QToolButton#btnExportRights:disabled,
+QToolButton#btnAddMCode:disabled,
+QToolButton#btnAddTCode:disabled,
+QToolButton#btnEditItem:disabled,
+QToolButton#btnDeleteItem:disabled,
+QToolButton#btnAddIOItem:disabled,
+QToolButton#btnEditVirtualItem:disabled,
+QToolButton#btnDeleteVirtualItem:disabled,
+QToolButton#btnEditInputItem:disabled,
+QToolButton#btnDeleteInputItem:disabled,
+QToolButton#btnChangeInput:disabled,
+QToolButton#btnEditOutputItem:disabled,
+QToolButton#btnDeleteOutputItem:disabled,
+QToolButton#btnChangeOutput:disabled,
+QToolButton#btnStartMonitor:disabled,
+QToolButton#btnStopMonitor:disabled,
+QToolButton#btnClearMessage:disabled
+{
+	background-color: #9F9F9F;
+	color:#DDDDDD;
+}
+
+
+/*--------------------------------------------------------------- 
+QToolButton
+--------------------------------------------------------------- */
+QToolButton#btnRapRate10Minus,
+QToolButton#btnRapRate10Plus,
+QToolButton#btnCutRate10Minus,
+QToolButton#btnCutRate10Plus,
+QToolButton#btnSpindleRate10Minus,
+QToolButton#btnSpindleRate10Plus,
+QToolButton#btnBoardToolAjust,
+QToolButton#btnBoardCalculateGap,
+QToolButton#tbnGet,
+QToolButton#btnKnifeAjust,
+QToolButton#btnBoardGapSettings
+{
+	background:#686868;
+	color:#FFFFFF;
+	border:1px solid #1F2332;
+	border-radius:0px;
+	font-size:14px;
+	font-family:'Microsoft yahei';
+}
+
+QToolButton#btnRapRate10Minus:hover,
+QToolButton#btnRapRate10Plus:hover,
+QToolButton#btnCutRate10Minus:hover,
+QToolButton#btnCutRate10Plus:hover,
+QToolButton#btnSpindleRate10Minus:hover,
+QToolButton#btnSpindleRate10Plus:hover,
+QToolButton#btnBoardToolAjust:hover,
+QToolButton#btnBoardCalculateGap:hover,
+QToolButton#tbnGet:hover,
+QToolButton#btnKnifeAjust:hover,
+QToolButton#btnBoardGapSettings:hover
+{
+	border:2px solid #E5C365;
+	color:#FFFFFF;
+}
+
+QToolButton#btnRapRate10Minus:pressed,
+QToolButton#btnRapRate10Plus:pressed,
+QToolButton#btnCutRate10Minus:pressed,
+QToolButton#btnCutRate10Plus:pressed,
+QToolButton#btnSpindleRate10Minus:pressed,
+QToolButton#btnSpindleRate10Plus:pressed,
+QToolButton#btnBoardToolAjust:pressed,
+QToolButton#btnBoardCalculateGap:pressed,
+QToolButton#tbnGet:pressed,
+QToolButton#btnKnifeAjust:pressed,
+QToolButton#btnBoardGapSettings:pressed
+{
+	background:#FFCC33;
+	color:#4D4D4D;
+	border:2px solid #F76900;
+}
+
+QToolButton#btnRapRate10Minus:checked,
+QToolButton#btnRapRate10Plus:checked,
+QToolButton#btnCutRate10Minus:checked,
+QToolButton#btnCutRate10Plus:checked,
+QToolButton#btnSpindleRate10Minus:checked,
+QToolButton#btnSpindleRate10Plus:checked,
+QToolButton#btnBoardToolAjust:checked,
+QToolButton#btnBoardCalculateGap:checked,
+QToolButton#btnBoardGapSettings:checked
+{
+	background:#FFCC33;
+	color:#4D4D4D;
+	border:2px solid #F76900;
+}
+
+QToolButton#btnRapRate10Minus:disabled,
+QToolButton#btnRapRate10Plus:disabled,
+QToolButton#btnCutRate10Minus:disabled,
+QToolButton#btnCutRate10Plus:disabled,
+QToolButton#btnSpindleRate10Minus:disabled,
+QToolButton#btnSpindleRate10Plus:disabled,
+QToolButton#btnBoardToolAjust:disabled,
+QToolButton#btnBoardCalculateGap:disabled,
+QToolButton#btnBoardGapSettings:disabled
+{
+	background-color: #9F9F9F;
+	color:#DDDDDD;
+}
+
+
+/*--------------------------------------------------------------- 
+QToolButton
+--------------------------------------------------------------- */
+QToolButton#btnJogAddY,
+QToolButton#btnJogSubY,
+QToolButton#btnJogAddX,
+QToolButton#btnJogSubX,
+QToolButton#btnJogAddZ,
+QToolButton#btnJogSubZ
+{
+	background:transparent;
+	color:#FFFFFF;
+	border:none;
+	font-size:14px;
+	font-family:'Microsoft yahei';
+}
+
+QToolButton#btnJogAddY:hover,
+QToolButton#btnJogSubY:hover,
+QToolButton#btnJogAddX:hover,
+QToolButton#btnJogSubX:hover,
+QToolButton#btnJogAddZ:hover,
+QToolButton#btnJogSubZ:hover
+{
+	border:2px solid #E5C365;
+	color:#FFFFFF;
+}
+
+QToolButton#btnJogAddY:pressed,
+QToolButton#btnJogSubY:pressed,
+QToolButton#btnJogAddX:pressed,
+QToolButton#btnJogSubX:pressed,
+QToolButton#btnJogAddZ:pressed,
+QToolButton#btnJogSubZ:pressed
+{
+	background:#FFCC33;
+	color:#FFFFFF;
+	border:2px solid #F76900;
+}
+
+QToolButton#btnJogAddY:checked,
+QToolButton#btnJogSubY:checked,
+QToolButton#btnJogAddX:checked,
+QToolButton#btnJogSubX:checked,
+QToolButton#btnJogAddZ:checked,
+QToolButton#btnJogSubZ:checked
+{
+	background:#FFCC33;
+	color:#FFFFFF;
+	border:2px solid #F76900;
+}
+
+QToolButton#btnJogAddY:disabled,
+QToolButton#btnJogSubY:disabled,
+QToolButton#btnJogAddX:disabled,
+QToolButton#btnJogSubX:disabled,
+QToolButton#btnJogAddZ:disabled,
+QToolButton#btnJogSubZ:disabled
+{
+	background-color: #9F9F9F;
+	color:#DDDDDD;
+}
+
+/*--------------------------------------------------------------- 
+QToolButton
+--------------------------------------------------------------- */
+QToolButton#btnJogBwd
+{
+	background:#686868;
+	color:#FFFFFF;
+	border:1px solid #1F2332;
+	border-radius:0px;
+	font-size:14px;
+	font-family:'Microsoft yahei';
+	image: url(:/Resources/MoveMinus_av.png);
+}
+
+QToolButton#btnJogBwd:hover
+{
+	border:2px solid #E5C365;
+	color:#FFFFFF;
+	image: url(:/Resources/MoveMinus_av.png);
+}
+
+QToolButton#btnJogBwd:pressed
+{
+	background:#FFCC33;
+	color:#FFFFFF;
+	border:2px solid #F76900;
+	image: url(:/Resources/MoveMinus_pr.png);
+}
+
+QToolButton#btnJogBwd:checked
+{
+	background:#FFCC33;
+	color:#FFFFFF;
+	border:2px solid #F76900;
+	image: url(:/Resources/MoveMinus_pr.png);
+}
+
+QToolButton#btnJogBwd:disabled
+{
+	background-color: #9F9F9F;
+	color:#DDDDDD;
+	image: url(:/Resources/MoveMinus_na.png);
+}
+
+QToolButton#btnJogFwd
+{
+	background:#686868;
+	color:#FFFFFF;
+	border:1px solid #1F2332;
+	border-radius:0px;
+	font-size:14px;
+	font-family:'Microsoft yahei';
+	image: url(:/Resources/MovePlus_av.png);
+}
+
+QToolButton#btnJogFwd:hover
+{
+	border:2px solid #E5C365;
+	color:#FFFFFF;
+	image: url(:/Resources/MovePlus_av.png);
+}
+
+QToolButton#btnJogFwd:pressed
+{
+	background:#FFCC33;
+	color:#FFFFFF;
+	border:2px solid #F76900;
+	image: url(:/Resources/MovePlus_pr.png);
+}
+
+QToolButton#btnJogFwd:checked
+{
+	background:#FFCC33;
+	color:#FFFFFF;
+	border:2px solid #F76900;
+	image: url(:/Resources/MovePlus_pr.png);
+}
+
+QToolButton#btnJogFwd:disabled
+{
+	background-color: #9F9F9F;
+	color:#DDDDDD;
+	image: url(:/Resources/MovePlus_na.png);
+}
+
+
+/*--------------------------------------------------------------- 
+QToolButton
+--------------------------------------------------------------- */
+QToolButton#btnHomeBwd
+{
+	background:#686868;
+	color:#FFFFFF;
+	border:1px solid #1F2332;
+	border-radius:0px;
+	font-size:14px;
+	font-family:'Microsoft yahei';
+	image: url(:/Resources/HomeAxisNegative_av.png);
+}
+
+QToolButton#btnHomeBwd:hover
+{
+	border:2px solid #E5C365;
+	color:#FFFFFF;
+	image: url(:/Resources/HomeAxisNegative_av.png);
+}
+
+QToolButton#btnHomeBwd:pressed
+{
+	background:#FFCC33;
+	color:#FFFFFF;
+	border:2px solid #F76900;
+	image: url(:/Resources/HomeAxisNegative_pr.png);
+}
+
+QToolButton#btnHomeBwd:checked
+{
+	background:#FFCC33;
+	color:#FFFFFF;
+	border:2px solid #F76900;
+	image: url(:/Resources/HomeAxisNegative_pr.png);
+}
+
+QToolButton#btnHomeBwd:disabled
+{
+	background-color: #9F9F9F;
+	color:#DDDDDD;
+	image: url(:/Resources/HomeAxisNegative_na.png);
+}
+
+QToolButton#btnHomeFwd
+{
+	background:#686868;
+	color:#FFFFFF;
+	border:1px solid #1F2332;
+	border-radius:0px;
+	font-size:14px;
+	font-family:'Microsoft yahei';
+	image: url(:/Resources/HomeAxisPositive_av.png);
+}
+
+QToolButton#btnHomeFwd:hover
+{
+	border:2px solid #E5C365;
+	color:#FFFFFF;
+	image: url(:/Resources/HomeAxisPositive_av.png);
+}
+
+QToolButton#btnHomeFwd:pressed
+{
+	background:#FFCC33;
+	color:#FFFFFF;
+	border:2px solid #F76900;
+	image: url(:/Resources/HomeAxisPositive_pr.png);
+}
+
+QToolButton#btnHomeFwd:checked
+{
+	background:#FFCC33;
+	color:#FFFFFF;
+	border:2px solid #F76900;
+	image: url(:/Resources/HomeAxisPositive_pr.png);
+}
+
+QToolButton#btnHomeFwd:disabled
+{
+	background-color: #9F9F9F;
+	color:#DDDDDD;
+	image: url(:/Resources/HomeAxisPositive_na.png);
+}
+
+QToolButton#btnHomeAll
+{
+	background:#686868;
+	color:#FFFFFF;
+	border:1px solid #1F2332;
+	border-radius:0px;
+	font-size:14px;
+	font-family:'Microsoft yahei';
+	image: url(:/Resources/HomeAllAxis_av.png);
+}
+
+QToolButton#btnHomeAll:hover
+{
+	border:2px solid #E5C365;
+	color:#FFFFFF;
+	image: url(:/Resources/HomeAllAxis_av.png);
+}
+
+QToolButton#btnHomeAll:pressed
+{
+	background:#FFCC33;
+	color:#FFFFFF;
+	border:2px solid #F76900;
+	image: url(:/Resources/HomeAllAxis_pr.png);
+}
+
+QToolButton#btnHomeAll:checked
+{
+	background:#FFCC33;
+	color:#FFFFFF;
+	border:2px solid #F76900;
+	image: url(:/Resources/HomeAllAxis_pr.png);
+}
+
+QToolButton#btnHomeAll:disabled
+{
+	background-color: #9F9F9F;
+	color:#DDDDDD;
+	image: url(:/Resources/HomeAllAxis_na.png);
+}
+
+/*--------------------------------------------------------------- 
+System Menu Button
+--------------------------------------------------------------- */
+QToolButton#btnMenu
+{
+	border-radius:35px;
+}
+
+/*--------------------------------------------------------------- 
+cMessageBox
+--------------------------------------------------------------- */
+cMessageBox .QWidget
+{ 
+	background-color:#535353;
+	border:none;
+}
+
+cMessageBox QDialog
+{ 
+	background-color:#535353;
+	border:none;
+}
+
+cMessageBox QLabel
+{ 
+	color:#FFFFFF; 
+	font-size:16px;
+	font-family:'Microsoft yahei';
+	border:none;
+} 
+
+
+/*--------------------------------------------------------------- 
+cDialog
+--------------------------------------------------------------- */
+cDialog .QWidget
+{
+	border:none;
+}
+
+cDialog .QDialog
+{
+	background-color: #535353;
+	color:white;
+	border: none;
+}
+
+QLabel#titleBar 
+{
+	background: #178FFF;
+	border: 2px solid #178FFF;
+}
+
+.QWidget#innerWidget
+{
+	background: #178FFF;
+	border: 2px solid #178FFF;
+}
+
+cDialog
+{
+	background-color: #535353;
+	color:white;
+	border: none;
+}
+
+
+/*--------------------------------------------------------------- 
+cGroupWidget
+--------------------------------------------------------------- */
+cGroupWidget
+{
+	qproperty-bgColor:#535353;
+    qproperty-tempColor:#383838;
+    qproperty-titleColor:#FFFFFF;
+    qproperty-borderRadius:0;
+}
+
+/*--------------------------------------------------------------- 
+cNavigationBar
+--------------------------------------------------------------- */
+cNavigationBar
+{
+	qproperty-borderWidth:2;
+	qproperty-borderColor:#1F2332;
+	qproperty-bgColorStart:#535353;
+    qproperty-bgColorEnd:#535353;
+	qproperty-barColorStart:#FFCC33;
+    qproperty-barColorEnd:#FFCC33;
+	qproperty-textNormalColor:#FFFFFF;
+    qproperty-textSelectColor:#4D4D4D;
+	qproperty-lineColor:#F76900;
+	qproperty-lineWidth:2;
+}
+
+/*--------------------------------------------------------------- 
+cLoggerWidget
+--------------------------------------------------------------- */
+cLoggerWidget
+{
+	background-color:#282828; 
+    color:#FFFFFF;
+}
+
+cLoggerWidget::pane
+{
+    background-color:#282828; 
+    color:#FFFFFF;
+    selection-background-color:#282828;
+    selection-color:#FFFFFF;
+    font-size:14px;
+    font-family:'Microsoft YaHei';
+}
+
+cLoggerWidget::item:selected,
+cLoggerWidget::item:hover
+{
+	background-color:#FCE6A2;
+	padding-left:6px;
+	border-bottom:1px solid #f76900;
+}
+
+cLoggerWidget::item:alternate:!selected
+{ 
+    background-color:#282828;
+} 
+
+cLoggerWidget::item:!alternate:!selected
+{ 
+    background-color:#282828;
+}
+
+/*--------------------------------------------------------------- 
+3VJ CNC Controls
+--------------------------------------------------------------- */
+CncIOButton,
+CncRegisterButton,
+CncToggleButton,
+CncJogButton,
+CncJogMultiButton
+{
+	background:#686868;
+	color:#FFFFFF;
+	border:2px solid #505050;
+	border-radius:0px;
+	font-size:14px;
+	font-family:'Microsoft yahei';
+}
+
+
+CncIOButton:hover,
+CncRegisterButton:hover,
+CncToggleButton:hover,
+CncJogButton:hover,
+CncJogMultiButton:hover
+{
+	color:#FFFFFF;
+	border-radius:0px;
+	border:2px solid #F76900;
+}
+
+CncIOButton:pressed,
+CncRegisterButton:pressed,
+CncToggleButton:pressed,
+CncJogButton:pressed,
+CncJogMultiButton:pressed
+{
+	background:#FFCC33;
+	color:#4D4D4D;
+	border-radius:0px;
+	border:2px solid #F76900;
+}
+
+CncIOButton:checked,
+CncRegisterButton:checked,
+CncToggleButton:checked,
+CncJogButton:checked,
+CncJogMultiButton:checked
+{
+	background:#FFCC33;
+	color:#4D4D4D;
+	border-radius:0px;
+	border:2px solid #F76900;
+}
+
+CncIOButton:disabled,
+CncRegisterButton:disabled,
+CncToggleButton:disabled,
+CncJogButton:disabled,
+CncJogMultiButton:disabled
+{
+	background-color: #9F9F9F;
+	color:#DDDDDD;
+	border-radius:0px;
+}
+
+
+</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <item row="0" column="0">
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="page">
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEditSearch">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>35</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="tbnSearch">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>搜索</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_playlist">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>下载列表</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_2">
+            <property name="minimumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>播放列表</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
+         <widget class="QTableWidget" name="tableWidgetSong">
+          <property name="styleSheet">
+           <string notr="true">	border:none;</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QWidget" name="widget" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>110</height>
+           </size>
+          </property>
+          <layout class="QGridLayout" name="gridLayout">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <property name="horizontalSpacing">
+            <number>5</number>
+           </property>
+           <property name="verticalSpacing">
+            <number>10</number>
+           </property>
+           <item row="0" column="4">
+            <widget class="QLabel" name="label">
+             <property name="styleSheet">
+              <string notr="true">font: 9pt &quot;Microsoft YaHei UI&quot;;</string>
+             </property>
+             <property name="text">
+              <string>播放设置</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="3" rowspan="2">
+            <widget class="QSlider" name="volumeSlider">
+             <property name="minimumSize">
+              <size>
+               <width>10</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>20</width>
+               <height>60</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QSlider{
+    border-color: #cbcbcb;
+}
+QSlider::groove:vertical {  
+
+background: #cbcbcb;  
+width: 6px;  
+border-radius: 1px;  
+padding-left:-1px;  
+padding-right:-1px;  
+padding-top:-1px;  
+padding-bottom:-1px;  
+} 
+QSlider::sub-page:vertical {  
+background: #cbcbcb;  
+
+border-radius: 2px;  
+} 
+QSlider::add-page:vertical {  
+background: qlineargradient(x1:0, y1:0, x2:0, y2:1,   
+    stop:0 #439cf4, stop:1 #439cf4);  
+background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,  
+    stop: 0 #439cf4, stop: 1 #439cf4);  
+width: 10px;  
+border-radius: 2px;  
+}
+QSlider::handle:vertical   
+{     
+    border-image: url(:/res/slider/circle.png);
+     margin: -2px -7px -2px -7px; 
+    height: 15px;
+}  
+</string>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QPushButton" name="pushButton_next">
+             <property name="minimumSize">
+              <size>
+               <width>140</width>
+               <height>22</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(189, 189, 189);</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="QLabel" name="label_2">
+             <property name="styleSheet">
+              <string notr="true">font: 9pt &quot;Microsoft YaHei UI&quot;;</string>
+             </property>
+             <property name="text">
+              <string>音量</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QPushButton" name="pushButton_pre">
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(189, 189, 189);</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0" rowspan="2" colspan="3">
+            <widget class="QWidget" name="widget_2" native="true">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>60</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QWidget#widget_2 
+{
+	border-radius:15px
+}</string>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <item>
+               <widget class="QLabel" name="playingCoverLablel">
+                <property name="minimumSize">
+                 <size>
+                  <width>22</width>
+                  <height>22</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>22</width>
+                  <height>22</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="playingArtistLabel">
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="playingNameLabel">
+                <property name="styleSheet">
+                 <string notr="true"/>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="now_duration">
+                <property name="text">
+                 <string>00:00</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QSlider" name="playProgressSlider">
+                <property name="styleSheet">
+                 <string notr="true">
+QSlider{
+border-color: #bcbcbc;
+}
+QSlider::groove:horizontal {                                
+     border: 1px solid #999999;                             
+     height: 1px;                                           
+    margin: 0px 0;                                         
+     left: 5px; right: 5px; 
+ }
+
+QSlider::handle:horizontal {                               
+     border: 0px ;                           
+     border-image:  url(:/res/slider/circle.png);
+     width: 15px;                                           
+     margin: -7px -7px -7px -7px;                  
+} 
+
+QSlider::add-page:horizontal{
+background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #bcbcbc, stop:0.25 #bcbcbc, stop:0.5 #bcbcbc, stop:1 #bcbcbc); 
+
+}
+
+QSlider::sub-page:horizontal{                               
+ background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #439cf3, stop:0.25 #439cf3, stop:0.5 #439cf3, stop:1 #439cf3);                     
+}</string>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="all_duration">
+                <property name="text">
+                 <string>00:00</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QPushButton" name="pushButton_play">
+             <property name="minimumSize">
+              <size>
+               <width>145</width>
+               <height>22</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>145</width>
+               <height>22</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: rgb(189, 189, 189);</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="4">
+            <widget class="QPushButton" name="pushButton_4">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>歌词</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="4">
+            <widget class="QComboBox" name="comboBox">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>32</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>10</height>
+              </size>
+             </property>
+             <item>
+              <property name="text">
+               <string>顺序播放</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>随机播放</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>单曲播放</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="page_2">
+       <layout class="QGridLayout" name="gridLayout_4">
+        <property name="leftMargin">
+         <number>5</number>
+        </property>
+        <property name="topMargin">
+         <number>5</number>
+        </property>
+        <property name="rightMargin">
+         <number>5</number>
+        </property>
+        <property name="bottomMargin">
+         <number>5</number>
+        </property>
+        <property name="spacing">
+         <number>11</number>
+        </property>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="pushButton">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>30</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>返回搜索</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QListWidget" name="lyricList">
+          <property name="styleSheet">
+           <string notr="true">QListWidget{
+	border:none;
+}
+
+QListWidget::item{
+	padding-top:10px;
+   	margin-left:40px;
+   	margin-right:40px;
+  	margin-top:0px;
+  	margin-bottom:0px;
+   background-color: rgb(255, 255, 255);
+}
+
+
+
+</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,10 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/icon/add.png</file>
+        <file>res/icon/last.png</file>
+        <file>res/icon/next.png</file>
+        <file>res/icon/pause.png</file>
+        <file>res/icon/play.png</file>
+        <file>res/slider/circle.png</file>
+    </qresource>
+</RCC>
